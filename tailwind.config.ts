@@ -63,16 +63,6 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				}
 			},
-			backgroundImage: {
-				'hero-gradient': 'var(--hero-gradient)',
-				'text-gradient': 'var(--text-gradient)',
-			},
-			boxShadow: {
-				'glow': 'var(--glow)',
-			},
-			transitionTimingFunction: {
-				'smooth': 'var(--transition)',
-			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
