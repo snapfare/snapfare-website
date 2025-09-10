@@ -121,7 +121,7 @@ const Premium = () => {
               
               <div className="text-center mb-8">
                 <h3 className="text-2xl font-bold mb-2 text-white">Premium</h3>
-                <div className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent mb-2">CHF 29</div>
+                <div className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent mb-2">CHF 49</div>
                 <p className="text-gray-300">Pro Jahr</p>
               </div>
               
