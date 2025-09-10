@@ -15,20 +15,20 @@ const Datenschutz = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold mb-4 text-white">1. Verantwortlicher</h2>
                 <div className="text-gray-300 leading-relaxed">
-                  <p className="font-semibold">SnapFare / Basics-DB (Einzelfirma)</p>
-                  <p>Dominic Bachmann, Musterstrasse 12, 8000 Zürich, Schweiz</p>
-                  <p>E-Mail: <a href="mailto:privacy@snapfare.ch" className="text-green-400 hover:text-green-300 transition-colors">privacy@snapfare.ch</a></p>
+                  <p className="font-semibold">Basics by Dominic Bachmann (Einzelfirma)</p>
+                  <p>Dominic Bachmann, 8123 Ebmatingen, Zürich, Schweiz</p>
+                  <p>E-Mail: <a href="mailto:privacy@snapfare.ch" className="text-green-400 hover:text-green-300 transition-colors">contact@basics-db.ch</a></p>
                 </div>
               </section>
 
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold mb-4 text-white">2. Arten personenbezogener Daten</h2>
-                <ul className="space-y-2 text-gray-300 leading-relaxed pl-6">
-                  <li><strong>Stammdaten:</strong> Name, E-Mail (Newsletter-Anmeldung, Konto-Kommunikation)</li>
-                  <li><strong>Transaktionsdaten:</strong> Zahlungsstatus, Betrag, Zeitpunkt (über Zahlungsdienstleister verarbeitet; keine Speicherung von Karten-/Kontodaten bei uns)</li>
-                  <li><strong>Nutzungsdaten:</strong> Log-Daten, Geräte-/Browser-Infos, Newsletter-Öffnungen & Klicks</li>
-                  <li><strong>Cookies & Tracking:</strong> siehe Abschnitt <em>Cookies</em></li>
-                </ul>
+                <div className="space-y-2 text-gray-300 leading-relaxed pl-6">
+                  <p><strong>Stammdaten:</strong> Name, E-Mail (Newsletter-Anmeldung, Konto-Kommunikation)</li>
+                  <p><strong>Transaktionsdaten:</strong> Zahlungsstatus, Betrag, Zeitpunkt (über Zahlungsdienstleister verarbeitet; keine Speicherung von Karten-/Kontodaten bei uns)</li>
+                  <p><strong>Nutzungsdaten:</strong> Log-Daten, Geräte-/Browser-Infos, Newsletter-Öffnungen & Klicks</li>
+                  <p><strong>Cookies & Tracking:</strong> siehe Abschnitt <em>Cookies</em></li>
+                </div>
               </section>
 
               <section className="mb-8">
