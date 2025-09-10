@@ -143,8 +143,8 @@ const Datenschutz = () => {
                   Du hast nach revDSG (und ggf. DSGVO) insbesondere das Recht auf Auskunft, Berichtigung, Löschung,
                   Einschränkung der Bearbeitung, Datenübertragbarkeit (soweit anwendbar) sowie Widerruf von
                   Einwilligungen. Wende dich hierzu an{" "}
-                  <a href="mailto:privacy@snapfare.ch" className="text-green-400 hover:text-green-300 transition-colors">
-                    privacy@snapfare.ch
+                  <a href="mailto:contact@basics-db.ch" className="text-green-400 hover:text-green-300 transition-colors">
+                    contact@basics-db.ch
                   </a>
                   . Zudem besteht das Recht, beim EDÖB Beschwerde zu erheben.
                 </p>
@@ -172,8 +172,8 @@ const Datenschutz = () => {
                 <h2 className="text-2xl font-semibold mb-4 text-white">Kontakt</h2>
                 <p className="text-gray-300">
                   Fragen zu dieser Datenschutzerklärung:{" "}
-                  <a href="mailto:privacy@snapfare.ch" className="text-green-400 hover:text-green-300 transition-colors">
-                    privacy@snapfare.ch
+                  <a href="mailto:contact@basics-db.ch" className="text-green-400 hover:text-green-300 transition-colors">
+                    contact@basics-db.ch
                   </a>
                 </p>
               </section>
