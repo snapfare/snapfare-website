@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { toast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 const Index = () => {
   const [email, setEmail] = useState('');
@@ -28,21 +29,31 @@ const Index = () => {
 
   const handleWaitlistSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    if (!email.trim()) return;
     
     setIsSubmitting(true);
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const { error } = await supabase
+        .from('waitlist')
+        .insert([{ 
+          email: email.trim().toLowerCase(),
+          location: userLocation 
+        }]);
+
+      if (error) {
+        console.error('Waitlist error:', error);
+        throw error;
+      }
       
       toast({
         title: "Erfolgreich angemeldet! 🎉",
         description: "Du hast es geschafft - wir werden dir bald weitere Informationen zukommen lassen.",
       });
+      
       setEmail('');
     } catch (error) {
-      console.error('Error submitting to waitlist:', error);
+      console.error('Error joining waitlist:', error);
       toast({
         title: "Fehler beim Anmelden",
         description: "Bitte versuche es noch einmal. Falls das Problem bestehen bleibt, kontaktiere uns.",

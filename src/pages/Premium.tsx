@@ -1,10 +1,46 @@
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Check, Star } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const Premium = () => {
-  const handleTwintPayment = () => {
-    // Hier würde der TWINT Business Zahlungslink aufgerufen werden
-    window.open("https://pay.payrexx.com/YOUR_TWINT_LINK", "_blank");
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+
+  const handleUpgrade = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+
+    setIsSubmitting(true);
+    try {
+      const response = await fetch("https://wwoowwnjrepokmjgxhlw.functions.supabase.co/create-session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      
+      if (data.payUrl) {
+        window.location.href = data.payUrl;
+      } else {
+        throw new Error("No payment URL received");
+      }
+    } catch (error) {
+      console.error("Upgrade error:", error);
+      alert(`Something went wrong: ${error instanceof Error ? error.message : "Unknown error"}`);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -102,12 +138,23 @@ const Premium = () => {
                 </li>
               </ul>
               
-              <Button 
-                onClick={handleTwintPayment}
-                className="w-full bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold py-3 transition-all duration-300 hover:shadow-lg"
-              >
-                Jetzt mit TWINT bezahlen
-              </Button>
+              <form onSubmit={handleUpgrade} className="space-y-4">
+                <Input
+                  type="email"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                />
+                <Button 
+                  type="submit"
+                  disabled={isSubmitting || !email}
+                  className="w-full bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold py-3 transition-all duration-300 hover:shadow-lg disabled:opacity-50"
+                >
+                  {isSubmitting ? "Processing..." : "Upgrade with TWINT"}
+                </Button>
+              </form>
             </div>
           </div>
         </div>
