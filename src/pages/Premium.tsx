@@ -5,6 +5,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
+const TWINT_LINK = "https://go.twint.ch/1/e/tw?tw=acq.gLWaSc6qS9WXTyve02qU3TYzXh6aJj-WV-OoE_J4WpK9fVqgx8XwDgLVcKKthvDk.&amount=49.00&trxInfo=SNAPFARE_PREMIUM_1Y"; // <-- deinen echten TWINT-Link einsetzen
+
 const Premium = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -16,28 +18,48 @@ const Premium = () => {
 
     setIsSubmitting(true);
     try {
-      const response = await fetch("https://wwoowwnjrepokmjgxhlw.functions.supabase.co/create-session", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
+      // Optional: schnelle Client-Validierung
+      const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!isEmail) {
+        toast?.({
+          title: "Ungültige E-Mail",
+          description: "Bitte gib eine gültige E-Mail-Adresse ein.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      // 1) E-Mail an Supabase Function schicken (z.B. Logging/Zuordnung)
+      const response = await fetch(
+        "https://wwoowwnjrepokmjgxhlw.functions.supabase.co/create-session",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        }
+      );
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        // Wenn dein Backend down ist, gehen wir dennoch weiter zu TWINT (Fallback)
+        console.warn(`Supabase returned ${response.status}, using TWINT fallback.`);
+        window.location.href = TWINT_LINK;
+        return;
       }
 
       const data = await response.json();
-      
-      if (data.payUrl) {
+
+      // 2) Bevorzugt die vom Backend gelieferte payUrl (falls sie auf TWINT/Payment zeigt)
+      if (data?.payUrl && typeof data.payUrl === "string") {
         window.location.href = data.payUrl;
-      } else {
-        throw new Error("No payment URL received");
+        return;
       }
+
+      // 3) Fallback: direkter TWINT-Link
+      window.location.href = TWINT_LINK;
     } catch (error) {
       console.error("Upgrade error:", error);
-      alert(`Something went wrong: ${error instanceof Error ? error.message : "Unknown error"}`);
+      // Hard Fallback: auch bei Fehlern trotzdem zu TWINT, damit der User zahlen kann
+      window.location.href = TWINT_LINK;
     } finally {
       setIsSubmitting(false);
     }
@@ -55,7 +77,7 @@ const Premium = () => {
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Unlock die vollständige Power von SnapFare und verpasse nie wieder einen Deal
+              Profitiere mit SnapFare Premium von noch mehr Deals und verpasse nie wieder Meilendeals, Business auf der Langstrecke oder Error Fares!
             </p>
           </div>
 
@@ -65,21 +87,21 @@ const Premium = () => {
               <div className="text-center mb-8">
                 <h3 className="text-2xl font-bold mb-2 text-white">Free</h3>
                 <div className="text-4xl font-bold text-white mb-2">CHF 0</div>
-                <p className="text-gray-300">Pro Monat</p>
+                <p className="text-gray-300">Pro Jahr</p>
               </div>
               
               <ul className="space-y-4 mb-8">
                 <li className="flex items-center gap-3">
                   <Check className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">Wöchentlicher Newsletter mit Top-Deals</span>
+                  <span className="text-gray-300">Newsletter mit den besten Reisedeals</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Check className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">Grundlegende Deal-Alerts</span>
+                  <span className="text-gray-300">Exklusive Meilendeals</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Check className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">Community-Zugang</span>
+                  <span className="text-gray-300">Kostenloser Zugang zur personalisierten Flugsuche (soon)</span>
                 </li>
               </ul>
               
@@ -100,41 +122,37 @@ const Premium = () => {
               <div className="text-center mb-8">
                 <h3 className="text-2xl font-bold mb-2 text-white">Premium</h3>
                 <div className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent mb-2">CHF 29</div>
-                <p className="text-gray-300">Pro Monat</p>
+                <p className="text-gray-300">Pro Jahr</p>
               </div>
               
               <ul className="space-y-4 mb-8">
                 <li className="flex items-center gap-3">
                   <Check className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">Alles aus Free</span>
+                  <span className="text-gray-300">Newsletter mit den besten Reisedeals</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Check className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">Echtzeit-Deal-Radar</span>
+                  <span className="text-gray-300">Vereinzelte Meilendeals</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Check className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">Preference-Match-Engine</span>
+                  <span className="text-gray-300">Kostenloser Zugang zur personalisierten Flugsuche (soon)</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Check className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">Smart-Alert System</span>
+                  <span className="text-gray-300">Personalisierte Live-Benachrichtigungen (soon)</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Check className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">1-Tap-Buchung</span>
+                  <span className="text-gray-300">Business- und Meilendeals auf Langstrecke</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Check className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">Price-Guard Monitor</span>
+                  <span className="text-gray-300">Direktbuchung Deals (soon)</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Check className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">Post-Trip-Assistent</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">Prioritäts-Support</span>
+                  <span className="text-gray-300">Zugang zur exklusiven SnapFare Community</span>
                 </li>
               </ul>
               
@@ -152,7 +170,7 @@ const Premium = () => {
                   disabled={isSubmitting || !email}
                   className="w-full bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold py-3 transition-all duration-300 hover:shadow-lg disabled:opacity-50"
                 >
-                  {isSubmitting ? "Processing..." : "Upgrade with TWINT"}
+                  {isSubmitting ? "In Verarbeitung..." : "Upgraden mit TWINT"}
                 </Button>
               </form>
             </div>
