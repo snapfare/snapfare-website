@@ -111,11 +111,9 @@ const Index = () => {
   ];
 
   const benefits = [
-    "Nie wieder stundenlang nach Deals suchen",
-    "Automatische Preisüberwachung",
-    "3-Minuten-Routine statt Schnäppchenjagd-Stress",
-    "Keine verpassten Gelegenheiten",
-    "Vollautomatische Abwicklung"
+    "Flugdeals direkt in deine Inbox",
+    "Preisüberwachung deiner Lieblingsdeals",
+    "Automatisierter Buchungsprozess ohne Stress",
   ];
 
   return (
