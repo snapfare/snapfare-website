@@ -5,6 +5,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
+const TWINT_LINK = "https://go.twint.ch/1/e/tw?tw=acq.gLWaSc6qS9WXTyve02qU3TYzXh6aJj-WV-OoE_J4WpK9fVqgx8XwDgLVcKKthvDk.&amount=49.00&trxInfo=SNAPFARE_PREMIUM_1Y"; // <-- deinen echten TWINT-Link einsetzen
+
 const Premium = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,31 +29,37 @@ const Premium = () => {
         return;
       }
 
-      // Use the send-confirmation-email function to get the correct TWINT link
-      const { data, error } = await supabase.functions.invoke('send-confirmation-email', {
-        body: { email }
-      });
+      // 1) E-Mail an Supabase Function schicken (z.B. Logging/Zuordnung)
+      const response = await fetch(
+        "https://wwoowwnjrepokmjgxhlw.functions.supabase.co/create-session",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        }
+      );
 
-      if (error) {
-        console.error('Error calling send-confirmation-email:', error);
-        toast?.({
-          title: "Fehler",
-          description: "Es gab einen Fehler beim Verarbeiten deiner Anfrage.",
-          variant: "destructive",
-        });
+      if (!response.ok) {
+        // Wenn dein Backend down ist, gehen wir dennoch weiter zu TWINT (Fallback)
+        console.warn(`Supabase returned ${response.status}, using TWINT fallback.`);
+        window.location.href = TWINT_LINK;
         return;
       }
 
-      // For now, redirect to a fixed TWINT link with the correct amount (CHF 49)
-      const twintLink = "https://go.twint.ch/1/e/tw?tw=acq.gLWaSc6qS9WXTyve02qU3TYzXh6aJj-WV-OoE_J4WpK9fVqgx8XwDgLVcKKthvDk.&amount=49.00&trxInfo=SNAPFARE_PREMIUM_1Y";
-      window.location.href = twintLink;
+      const data = await response.json();
+
+      // 2) Bevorzugt die vom Backend gelieferte payUrl (falls sie auf TWINT/Payment zeigt)
+      if (data?.payUrl && typeof data.payUrl === "string") {
+        window.location.href = data.payUrl;
+        return;
+      }
+
+      // 3) Fallback: direkter TWINT-Link
+      window.location.href = TWINT_LINK;
     } catch (error) {
       console.error("Upgrade error:", error);
-      toast?.({
-        title: "Fehler",
-        description: "Es gab einen Fehler beim Verarbeiten deiner Anfrage.",
-        variant: "destructive",
-      });
+      // Hard Fallback: auch bei Fehlern trotzdem zu TWINT, damit der User zahlen kann
+      window.location.href = TWINT_LINK;
     } finally {
       setIsSubmitting(false);
     }
