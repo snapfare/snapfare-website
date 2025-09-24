@@ -90,15 +90,6 @@ const handler = async (req: Request): Promise<Response> => {
               </p>
               ` : ''}
               
-              <div style="background-color: #1e293b; border-radius: 8px; padding: 25px; margin: 30px 0; text-align: center;">
-                <h3 style="color: #ffffff; font-size: 16px; font-weight: 600; margin: 0 0 15px 0;">Setzen Sie jetzt Ihr Passwort!</h3>
-                <p style="color: #cbd5e1; font-size: 14px; margin: 0 0 15px 0;">Für den Zugang zu personalisierten Flugdeals und Premium-Features können Sie hier Ihr Passwort setzen:</p>
-                <a href="${process.env.SITE_URL || 'https://snapfare.ch'}/auth" 
-                   style="display: inline-block; background-color: #3b82f6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600; margin-top: 10px;">
-                  Passwort setzen
-                </a>
-              </div>
-              
               <div style="background-color: #f8fafc; border-radius: 8px; padding: 25px; margin: 30px 0; text-align: center;">
                 <h3 style="color: #1e293b; font-size: 16px; font-weight: 600; margin: 0 0 10px 0;">Halte Ausschau nach dem SnapFare Newsletter!</h3>
                 <p style="color: #64748b; font-size: 14px; margin: 0;">Wir melden uns bald mit weiteren exklusiven Updates und deinem persönlichen Zugang.</p>
