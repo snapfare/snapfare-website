@@ -255,7 +255,7 @@ const Index = () => {
                   </div>
                   <div className="text-center">
                     <div className="text-xs text-gray-400 mb-1">Preis pro Person</div>
-                    <div className="text-3xl font-bold text-green-400">CHF 360</div>
+                    <div className="text-3xl font-bold text-green-400">CHF 290</div>
                     <div className="text-xs text-gray-400">inkl. Steuern & Gebühren</div>
                   </div>
                 </div>
