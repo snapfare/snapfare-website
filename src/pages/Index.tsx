@@ -178,7 +178,7 @@ const Index = () => {
             {/* Flight Deals Section */}
             <div className="max-w-5xl mx-auto px-4">
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed px-4">
-                Melde dich jetzt an, um die besten<span className="text-green-400">Flugdeals</span> der letzten Woche zu erhalten!
+                Melde dich jetzt an, um die besten <span className="text-green-400">Flugdeals</span> der letzten Woche zu erhalten!
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
@@ -186,23 +186,23 @@ const Index = () => {
                 <div className="bg-white/10 border border-white/20 rounded-lg p-6 aspect-square flex flex-col justify-between hover:bg-white/15 transition-all duration-300">
                   <div>
                     <div className="flex items-center justify-center gap-3 mb-4">
-                      <span className="text-xl font-bold text-white">ZUR</span>
+                      <span className="text-xl font-bold text-white">Zürich</span>
                       <ArrowRight className="h-6 w-6 text-green-400" />
-                      <span className="text-xl font-bold text-white">BKK</span>
+                      <span className="text-xl font-bold text-white">Bangkok</span>
                     </div>
                     <div className="text-center mb-4">
-                      <div className="text-sm text-gray-300 mb-1">Swiss International Air Lines</div>
-                      <div className="text-xs text-gray-400">Direktflug • Economy</div>
+                      <div className="text-sm text-gray-300 mb-1">???</div>
+                      <div className="text-xs text-gray-400">B787 • Economy</div>
                     </div>
                     <div className="text-center mb-3">
                       <div className="text-sm text-gray-300 mb-1">Reisedaten</div>
-                      <div className="text-sm font-semibold text-white">15. März - 29. März 2025</div>
+                      <div className="text-sm font-semibold text-white">November - Februar 2026</div>
                       <div className="text-xs text-gray-400">14 Tage</div>
                     </div>
                   </div>
                   <div className="text-center">
                     <div className="text-xs text-gray-400 mb-1">Preis pro Person</div>
-                    <div className="text-3xl font-bold text-green-400">CHF 687</div>
+                    <div className="text-3xl font-bold text-green-400">CHF 360</div>
                     <div className="text-xs text-gray-400">inkl. Steuern & Gebühren</div>
                   </div>
                 </div>
