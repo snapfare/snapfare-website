@@ -177,9 +177,9 @@ const Index = () => {
 
             {/* Flight Deals Section */}
             <div className="max-w-5xl mx-auto px-4">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center text-white mb-8 sm:mb-12">
-                Melde dich jetzt an, um solche <span className="text-green-400">Flugdeals ab der Schweiz</span> direkt in deiner Inbox zu erhalten
-              </h3>
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed px-4">
+                Melde dich jetzt an, um die besten<span className="text-green-400">Flugdeals</span> der letzten Woche zu erhalten!
+              </p>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
                 {/* Deal 1 */}
