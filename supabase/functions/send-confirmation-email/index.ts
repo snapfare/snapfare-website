@@ -75,7 +75,7 @@ const handler = async (req: Request): Promise<Response> => {
 
               <!-- Info Box: Was passiert als nächstes? -->
               <div style="background:linear-gradient(135deg,#f0fdf4 0%, #eff6ff 100%);border-radius:8px;padding:25px;margin:25px 0;">
-                <h3 style="color:#047857;font-size:18px;font-weight:600;margin:0 0 15px 0;">Was passiert als nächstes?</h3>
+                <h3 style="color:#047857;font-size:18px;font-weight:600;margin:0 0 15px 0;text-align:center;">Was passiert als nächstes?</h3>
                 <ul style="color:#374151;font-size:14px;line-height:1.6;margin:0;padding-left:20px;">
                   <li style="margin-bottom:8px;">🔍 Wir schicken dir alle zwei Wochen einen Newsletter mit den besten Deals</li>
                   <li style="margin-bottom:8px;">📱 Du erhältst eine persönliche Einladung sobald die personalisierte Flugsuche verfügbar ist</li>
@@ -86,9 +86,9 @@ const handler = async (req: Request): Promise<Response> => {
 
               <!-- NEW: Aktuelle Deals Box -->
               <div style="background:linear-gradient(135deg,#f8fafc 0%, #eef2ff 100%);border:1px solid #e2e8f0;border-radius:8px;padding:24px;margin:28px 0;">
-                <h3 style="color:#1e293b;font-size:18px;font-weight:700;margin:0 0 14px 0;text-align:center;">Aktuelle Deals (Woche)</h3>
+                <h3 style="color:#1e293b;font-size:18px;font-weight:700;margin:0 0 14px 0;text-align:center;">Die aktuellen Flugdeals für dich</h3>
                 <p style="color:#64748b;font-size:13px;line-height:1.6;margin:0 0 18px 0;text-align:center;">
-                  Direkt für dich – die besten Angebote der letzten Woche. Preise und Verfügbarkeiten können sich schnell ändern.
+                  Preise und Verfügbarkeiten können sich schnell ändern.
                 </p>
 
                 <!-- Deals Wrapper Table (für E-Mail-Clients robust) -->
@@ -264,7 +264,7 @@ const handler = async (req: Request): Promise<Response> => {
             <!-- Footer -->
             <div style="background-color:#f8fafc;padding:30px;text-align:center;border-top:1px solid #e2e8f0;">
               <p style="color:#64748b;font-size:12px;margin:0 0 10px 0;">
-                Du erhältst diese E-Mail, weil du dich für die SnapFare Warteliste angemeldet hast.
+                Du erhältst diese E-Mail, weil du dich bei SnapFare angemeldet hast.
               </p>
               <p style="color:#94a3b8;font-size:11px;margin:0;">
                 © 2025 SnapFare. Alle Rechte vorbehalten.
