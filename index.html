@@ -1,20 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SnapFare - Vollautomatisierte Schnäppchenjagd</title>
-    <meta name="description" content="SnapFare scannt minütlich das Netz und liefert dir sofort jeden Flugdeal aufs Handy. Vollautomatisch, ohne Stress, ohne Preisprünge." />
+    <title>SnapFare - Flugdeals & günstige Flüge nach Zürich | Premium Reiseangebote</title>
+    <meta name="description" content="Erhalte die besten Flugdeals ab Zürich direkt in deine Inbox. SnapFare findet automatisch günstige Flüge, Meilendeals und Business-Class Angebote. Jetzt kostenlos anmelden!" />
+    <meta name="keywords" content="Flugdeals, günstige Flüge Zürich, Flugschnäppchen, Meilendeals, Business Class Angebote, Error Fares, Reisedeals Schweiz" />
     <meta name="author" content="SnapFare" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://snapfare.lovable.app/" />
 
-    <meta property="og:title" content="SnapFare - Vollautomatisierte Schnäppchenjagd" />
-    <meta property="og:description" content="SnapFare scannt minütlich das Netz und liefert dir sofort jeden Flugdeal aufs Handy. Vollautomatisch, ohne Stress, ohne Preisprünge." />
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://snapfare.lovable.app/" />
+    <meta property="og:title" content="SnapFare - Beste Flugdeals ab Zürich | Premium Reiseangebote" />
+    <meta property="og:description" content="Erhalte die besten Flugdeals ab Zürich direkt in deine Inbox. Automatische Flugsuche, Meilendeals und Business-Class Angebote." />
     <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:locale" content="de_CH" />
+    <meta property="og:site_name" content="SnapFare" />
 
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@snapfare" />
+    <meta name="twitter:url" content="https://snapfare.lovable.app/" />
+    <meta name="twitter:title" content="SnapFare - Flugdeals & günstige Flüge ab Zürich" />
+    <meta name="twitter:description" content="Die besten Flugdeals ab Zürich. Meilendeals, Business-Class Angebote und Error Fares automatisch finden." />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta name="twitter:site" content="@snapfare" />
+    <meta name="twitter:creator" content="@snapfare" />
 
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-0G9TKRS60D"></script>
@@ -28,6 +40,63 @@
 
   <body>
     <div id="root"></div>
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "SnapFare",
+      "url": "https://snapfare.lovable.app",
+      "logo": "https://lovable.dev/opengraph-image-p98pqg.png",
+      "description": "SnapFare findet automatisch die besten Flugdeals ab Zürich - Meilendeals, Business-Class Angebote und Error Fares",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Service",
+        "availableLanguage": ["German", "English"]
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Switzerland"
+      }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "SnapFare",
+      "url": "https://snapfare.lovable.app",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://snapfare.lovable.app/?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "SnapFare Premium",
+      "description": "Premium Zugang zu exklusiven Flugdeals, Business-Class Angeboten und Meilendeals",
+      "brand": {
+        "@type": "Brand",
+        "name": "SnapFare"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://snapfare.lovable.app/premium",
+        "priceCurrency": "CHF",
+        "price": "49.00",
+        "priceValidUntil": "2026-12-31",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+    </script>
+    
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
