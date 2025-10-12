@@ -95,164 +95,163 @@ const handler = async (req: Request): Promise<Response> => {
                 <!-- Deals Wrapper Table (für E-Mail-Clients robust) -->
                 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
                   <tbody>
-
-                    <!-- ===================== DEAL 1 ===================== -->
-                    <tr><td style="padding:10px 0;">
-                      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"
-                             style="width:100%;border-radius:14px;background:#ffffff;border:1px solid #e2e8f0;box-shadow:0 1px 2px rgba(0,0,0,0.03);text-align:center;">
-                        <tr>
-                          <td style="padding:20px 16px;">
-                            <img src="https://wallpapercave.com/wp/wp1916912.jpg"
-                                 width="160" height="100" alt="Zürich → Bangkok"
-                                 style="display:block;margin:0 auto;border-radius:12px;width:160px;height:100px;object-fit:cover;border:1px solid #e5e7eb;">
-                            <div style="margin-top:12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;font-size:18px;line-height:24px;color:#1f2937;font-weight:800;">
-                              Zürich (ZRH) →<br>Bangkok (BKK)
-                            </div>
-                            <div style="margin-top:4px;font-size:13px;line-height:18px;color:#6b7280;">
-                              Oman Air
-                            </div>
-                            <div style="margin-top:10px;font-size:13px;line-height:20px;color:#334155;">🧳 Gepäck: 8&nbsp;kg&nbsp;+&nbsp;23&nbsp;kg (für 30 CHF)</div>
-                            <div style="margin-top:4px;font-size:13px;line-height:20px;color:#334155;">✈️ Flugzeug: B787</div>
-                            <div style="margin-top:4px;font-size:13px;line-height:20px;color:#334155;">💳 Meilen: <strong>FlyingBlue</strong> ~1'200–3'000</div>
-                            <div style="margin-top:8px;font-size:12px;line-height:18px;color:#64748b;">
-                              Mögliche Reisedaten:<br>12.–26. Nov · 05.–19. Jan · 02.–16. Feb (Weiterleitung Oman Air)
-                            </div>
-                            <div style="margin-top:14px;font-size:22px;line-height:26px;color:#0ea5e9;font-weight:900;">ab CHF 360</div>
-                            <a href="https://skyscanner.pxf.io/xLKBxd" target="_blank"
-                               style="display:inline-block;background:#2264f5;color:#ffffff;text-decoration:none;font-size:13px;font-weight:700;padding:10px 18px;border-radius:12px;border:1px solid #1d4ed8;">
-                              Deal ansehen
-                            </a>
-                          </td>
-                        </tr>
-                      </table>
-                    </td></tr>
-
-                    <!-- ===================== DEAL 2 ===================== -->
-                    <tr><td style="padding:10px 0;">
-                      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"
-                             style="width:100%;border-radius:14px;background:#ffffff;border:1px solid #e2e8f0;box-shadow:0 1px 2px rgba(0,0,0,0.03);text-align:center;">
-                        <tr>
-                          <td style="padding:20px 16px;">
-                            <img src="https://wallpapercave.com/wp/wp11562885.jpg"
-                                 width="160" height="100" alt="Zürich → New York"
-                                 style="display:block;margin:0 auto;border-radius:12px;width:160px;height:100px;object-fit:cover;border:1px solid #e5e7eb;">
-                            <div style="margin-top:12px;font-size:18px;line-height:24px;color:#1f2937;font-weight:800;">
-                              Zürich (ZRH) →<br>New York (JFK)
-                            </div>
-                            <div style="margin-top:4px;font-size:13px;line-height:18px;color:#6b7280;">
-                              Condor (oder SAS)
-                            </div>
-                            <div style="margin-top:10px;font-size:13px;line-height:20px;color:#334155;">🧳 Gepäck: 8&nbsp;kg + 23&nbsp;kg (75 CHF Aufpreis)</div>
-                            <div style="margin-top:4px;font-size:13px;line-height:20px;color:#334155;">✈️ Flugzeug: A330</div>
-                            <div style="margin-top:4px;font-size:13px;line-height:20px;color:#334155;">💳 Meilen: <strong>Emirates</strong> ~9'600</div>
-                            <div style="margin-top:8px;font-size:12px;line-height:18px;color:#64748b;">
-                              Mögliche Reisedaten:<br>Winter 2025/2026, speziell November
-                            </div>
-                            <div style="margin-top:14px;font-size:22px;line-height:26px;color:#0ea5e9;font-weight:900;">ab CHF 290</div>
-                            <a href="https://skyscanner.pxf.io/WyebxM" target="_blank"
-                               style="display:inline-block;background:#2264f5;color:#ffffff;text-decoration:none;font-size:13px;font-weight:700;padding:10px 18px;border-radius:12px;border:1px solid #1d4ed8;">
-                              Deal ansehen
-                            </a>
-                          </td>
-                        </tr>
-                      </table>
-                    </td></tr>
-
-                    <!-- ===================== DEAL 3 ===================== -->
-                    <tr><td style="padding:10px 0;">
-                      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"
-                             style="width:100%;border-radius:14px;background:#ffffff;border:1px solid #e2e8f0;box-shadow:0 1px 2px rgba(0,0,0,0.03);text-align:center;">
-                        <tr>
-                          <td style="padding:20px 16px;">
-                            <img src="https://static.independent.co.uk/2023/07/12/14/newFile-6.jpg"
-                                 width="160" height="100" alt="Zürich → Lissabon"
-                                 style="display:block;margin:0 auto;border-radius:12px;width:160px;height:100px;object-fit:cover;border:1px solid #e5e7eb;">
-                            <div style="margin-top:12px;font-size:18px;line-height:24px;color:#1f2937;font-weight:800;">
-                              Zürich (ZRH) →<br>Lissabon (LIS)
-                            </div>
-                            <div style="margin-top:4px;font-size:13px;line-height:18px;color:#6b7280;">
-                              easyJet
-                            </div>
-                            <div style="margin-top:10px;font-size:13px;line-height:20px;color:#334155;">🧳 Gepäck: 8&nbsp;kg</div>
-                            <div style="margin-top:4px;font-size:13px;line-height:20px;color:#334155;">✈️ Flugzeug: A320/A321</div>
-                            <div style="margin-top:4px;font-size:13px;line-height:20px;color:#334155;">💳 Meilen: — (No-Miles-Tarif)</div>
-                            <div style="margin-top:8px;font-size:12px;line-height:18px;color:#64748b;">
-                              Mögliche Reisedaten:<br>Oktober 2025 – März 2026
-                            </div>
-                            <div style="margin-top:14px;font-size:22px;line-height:26px;color:#0ea5e9;font-weight:900;">ab CHF 70</div>
-                            <a href="https://skyscanner.pxf.io/gOnm3v" target="_blank"
-                               style="display:inline-block;background:#2264f5;color:#ffffff;text-decoration:none;font-size:13px;font-weight:700;padding:10px 18px;border-radius:12px;border:1px solid #1d4ed8;">
-                              Deal ansehen
-                            </a>
-                          </td>
-                        </tr>
-                      </table>
-                    </td></tr>
-
-                    <!-- ===================== DEAL 4 ===================== -->
-                    <tr><td style="padding:10px 0;">
-                      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"
-                             style="width:100%;border-radius:14px;background:#ffffff;border:1px solid #e2e8f0;box-shadow:0 1px 2px rgba(0,0,0,0.03);text-align:center;">
-                        <tr>
-                          <td style="padding:20px 16px;">
-                            <img src="https://mediafiles.reiseuhu.de/wp-content/uploads/2019/05/prag-tipps8.jpg"
-                                 width="160" height="100" alt="Basel → Prag"
-                                 style="display:block;margin:0 auto;border-radius:12px;width:160px;height:100px;object-fit:cover;border:1px solid #e5e7eb;">
-                            <div style="margin-top:12px;font-size:18px;line-height:24px;color:#1f2937;font-weight:800;">
-                              Basel (BSL) →<br>Prag (PRG)
-                            </div>
-                            <div style="margin-top:4px;font-size:13px;line-height:18px;color:#6b7280;">
-                              easyJet
-                            </div>
-                            <div style="margin-top:10px;font-size:13px;line-height:20px;color:#334155;">🧳 Gepäck: 8&nbsp;kg</div>
-                            <div style="margin-top:4px;font-size:13px;line-height:20px;color:#334155;">✈️ Flugzeug: A319/A320</div>
-                            <div style="margin-top:4px;font-size:13px;line-height:20px;color:#334155;">💳 Meilen: — (No-Miles-Tarif)</div>
-                            <div style="margin-top:8px;font-size:12px;line-height:18px;color:#64748b;">
-                              Mögliche Reisedaten:<br>Dezember 2025 – März 2026
-                            </div>
-                            <div style="margin-top:14px;font-size:22px;line-height:26px;color:#0ea5e9;font-weight:900;">ab CHF 55</div>
-                            <a href="https://skyscanner.pxf.io/4G7z6r" target="_blank"
-                               style="display:inline-block;background:#2264f5;color:#ffffff;text-decoration:none;font-size:13px;font-weight:700;padding:10px 18px;border-radius:12px;border:1px solid #1d4ed8;">
-                              Deal ansehen
-                            </a>
-                          </td>
-                        </tr>
-                      </table>
-                    </td></tr>
-
-                    <!-- ===================== DEAL 5 ===================== -->
-                    <tr><td style="padding:10px 0;">
-                      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"
-                             style="width:100%;border-radius:14px;background:#ffffff;border:1px solid #e2e8f0;box-shadow:0 1px 2px rgba(0,0,0,0.03);text-align:center;">
-                        <tr>
-                          <td style="padding:20px 16px;">
-                            <img src="https://cdn.generationvoyage.fr/2020/11/guide-voyage-miami-1.jpg"
-                                 width="160" height="100" alt="Zürich → Miami"
-                                 style="display:block;margin:0 auto;border-radius:12px;width:160px;height:100px;object-fit:cover;border:1px solid #e5e7eb;">
-                            <div style="margin-top:12px;font-size:18px;line-height:24px;color:#1f2937;font-weight:800;">
-                              Zürich (ZRH) →<br>Miami (MIA)
-                            </div>
-                            <div style="margin-top:4px;font-size:13px;line-height:18px;color:#6b7280;">
-                              Swiss
-                            </div>
-                            <div style="margin-top:10px;font-size:13px;line-height:20px;color:#334155;">🧳 Gepäck: 8&nbsp;kg&nbsp;+&nbsp;23&nbsp;kg (kleiner Aufpreis)</div>
-                            <div style="margin-top:4px;font-size:13px;line-height:20px;color:#334155;">✈️ Flugzeug: B777/A330</div>
-                            <div style="margin-top:4px;font-size:13px;line-height:20px;color:#334155;">💳 Meilen: <strong>Miles&amp;More</strong> ~700–1'100</div>
-                            <div style="margin-top:8px;font-size:12px;line-height:18px;color:#64748b;">
-                              Mögliche Reisedaten:<br>November 2025 – März 2026
-                            </div>
-                            <div style="margin-top:14px;font-size:22px;line-height:26px;color:#0ea5e9;font-weight:900;">CHF 400</div>
-                            <a href="https://skyscanner.pxf.io/POQJjX" target="_blank"
-                               style="display:inline-block;background:#2264f5;color:#ffffff;text-decoration:none;font-size:13px;font-weight:700;padding:10px 18px;border-radius:12px;border:1px solid #1d4ed8;">
-                              Deal ansehen
-                            </a>
-                          </td>
-                        </tr>
-                      </table>
-                    </td></tr>
-
-                  </tbody>
-                </table>
+          <!-- ===================== DEAL 1 ===================== -->
+          <tr><td style="padding:10px 0;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"
+                   style="width:100%;border-radius:14px;background:#ffffff;border:1px solid #e2e8f0;box-shadow:0 1px 2px rgba(0,0,0,0.03);text-align:center;">
+              <tr>
+                <td style="padding:20px 16px;">
+                  <img src="https://d12a3lcl7jb9h2.cloudfront.net/assets/DERTOUR/bltb222bfbf7907fad8/62fe2f5130f8af2a54920839/s%C3%BCdafrika-kapstadt-stadtpanorama-klein-g-491411894.jpg"
+                       width="160" height="100" alt="Zürich → Kapstadt"
+                       style="display:block;margin:0 auto;border-radius:12px;width:160px;height:100px;object-fit:cover;border:1px solid #e5e7eb;">
+                  <div style="margin-top:12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;font-size:18px;line-height:24px;color:#1f2937;font-weight:800;">
+                    Zürich (ZRH) →<br>Kapstadt (CPT)
+                  </div>
+                  <div style="margin-top:4px;font-size:13px;line-height:18px;color:#6b7280;">
+                    Condor
+                  </div>
+                  <div style="margin-top:10px;font-size:13px;line-height:20px;color:#334155;">🧳 Gepäck: 8&nbsp;kg&nbsp;+&nbsp;23&nbsp;kg (Aufpreis ca. 150 CHF)</div>
+                  <div style="margin-top:4px;font-size:13px;line-height:20px;color:#334155;">✈️ Flugzeug: A330neo (Hin- und Rückflug)</div>
+                  <div style="margin-top:4px;font-size:13px;line-height:20px;color:#334155;">💳 Meilen: <strong>Alaska Mileage Plan</strong> ~3'000</div>
+                  <div style="margin-top:8px;font-size:12px;line-height:18px;color:#64748b;">
+                    Mögliche Reisedaten:<br>Einzelne Daten im Winter 2025/26
+                  </div>
+                  <div style="margin-top:14px;font-size:22px;line-height:26px;color:#0ea5e9;font-weight:900;">ab CHF 430</div>
+                  <a href="https://skyscanner.pxf.io/4G9J19" target="_blank"
+                     style="display:inline-block;background:#2264f5;color:#ffffff;text-decoration:none;font-size:13px;font-weight:700;padding:10px 18px;border-radius:12px;border:1px solid #1d4ed8;">
+                    Deal ansehen
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td></tr>
+          
+          <!-- ===================== DEAL 2 ===================== -->
+          <tr><td style="padding:10px 0;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"
+                   style="width:100%;border-radius:14px;background:#ffffff;border:1px solid #e2e8f0;box-shadow:0 1px 2px rgba(0,0,0,0.03);text-align:center;">
+              <tr>
+                <td style="padding:20px 16px;">
+                  <img src="https://wallpapercave.com/wp/wp1813738.jpg"
+                       width="160" height="100" alt="Zürich → Istanbul"
+                       style="display:block;margin:0 auto;border-radius:12px;width:160px;height:100px;object-fit:cover;border:1px solid #e5e7eb;">
+                  <div style="margin-top:12px;font-size:18px;line-height:24px;color:#1f2937;font-weight:800;">
+                    Zürich (ZRH) →<br>Istanbul (SAW)
+                  </div>
+                  <div style="margin-top:4px;font-size:13px;line-height:18px;color:#6b7280;">
+                    AJet (Turkish Airlines)
+                  </div>
+                  <div style="margin-top:10px;font-size:13px;line-height:20px;color:#334155;">🧳 Gepäck: 8&nbsp;kg</div>
+                  <div style="margin-top:4px;font-size:13px;line-height:20px;color:#334155;">✈️ Flugzeug: A320 (Hin- und Rückflug)</div>
+                  <div style="margin-top:4px;font-size:13px;line-height:20px;color:#334155;">💳 Meilen: <strong>Miles&amp;Smiles</strong> 0–700</div>
+                  <div style="margin-top:8px;font-size:12px;line-height:18px;color:#64748b;">
+                    Mögliche Reisedaten:<br>November 2025 – März 2026
+                  </div>
+                  <div style="margin-top:14px;font-size:22px;line-height:26px;color:#0ea5e9;font-weight:900;">ab CHF 60</div>
+                  <a href="https://skyscanner.pxf.io/jebzKP" target="_blank"
+                     style="display:inline-block;background:#2264f5;color:#ffffff;text-decoration:none;font-size:13px;font-weight:700;padding:10px 18px;border-radius:12px;border:1px solid #1d4ed8;">
+                    Deal ansehen
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td></tr>
+          
+          <!-- ===================== DEAL 3 ===================== -->
+          <tr><td style="padding:10px 0;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"
+                   style="width:100%;border-radius:14px;background:#ffffff;border:1px solid #e2e8f0;box-shadow:0 1px 2px rgba(0,0,0,0.03);text-align:center;">
+              <tr>
+                <td style="padding:20px 16px;">
+                  <img src="https://hoycuriosidades.com/wp-content/uploads/2021/08/singapur-1536x864.jpg"
+                       width="160" height="100" alt="Zürich → Singapur"
+                       style="display:block;margin:0 auto;border-radius:12px;width:160px;height:100px;object-fit:cover;border:1px solid #e5e7eb;">
+                  <div style="margin-top:12px;font-size:18px;line-height:24px;color:#1f2937;font-weight:800;">
+                    Zürich (ZRH) →<br>Singapur (SIN)
+                  </div>
+                  <div style="margin-top:4px;font-size:13px;line-height:18px;color:#6b7280;">
+                    Turkish Airlines (beste Economy!)
+                  </div>
+                  <div style="margin-top:10px;font-size:13px;line-height:20px;color:#334155;">🧳 Gepäck: 8&nbsp;kg&nbsp;+&nbsp;23&nbsp;kg</div>
+                  <div style="margin-top:4px;font-size:13px;line-height:20px;color:#334155;">✈️ Flugzeug: A321 + A350</div>
+                  <div style="margin-top:4px;font-size:13px;line-height:20px;color:#334155;">💳 Meilen: <strong>Miles&amp;More</strong> 3'200</div>
+                  <div style="margin-top:8px;font-size:12px;line-height:18px;color:#64748b;">
+                    Mögliche Reisedaten:<br>Oktober 2025 – Juni 2026
+                  </div>
+                  <div style="margin-top:14px;font-size:22px;line-height:26px;color:#0ea5e9;font-weight:900;">ab CHF 460</div>
+                  <a href="https://skyscanner.pxf.io/VxPbyk" target="_blank"
+                     style="display:inline-block;background:#2264f5;color:#ffffff;text-decoration:none;font-size:13px;font-weight:700;padding:10px 18px;border-radius:12px;border:1px solid #1d4ed8;">
+                    Deal ansehen
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td></tr>
+          
+          <!-- ===================== DEAL 4 ===================== -->
+          <tr><td style="padding:10px 0;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"
+                   style="width:100%;border-radius:14px;background:#ffffff;border:1px solid #e2e8f0;box-shadow:0 1px 2px rgba(0,0,0,0.03);text-align:center;">
+              <tr>
+                <td style="padding:20px 16px;">
+                  <img src="https://i.pinimg.com/736x/0c/d3/ce/0cd3ce38dfa34309d3a92ce8b2639448--halkidiki-greece-visit-greece.jpg"
+                       width="160" height="100" alt="Zürich → Thessaloniki"
+                       style="display:block;margin:0 auto;border-radius:12px;width:160px;height:100px;object-fit:cover;border:1px solid #e5e7eb;">
+                  <div style="margin-top:12px;font-size:18px;line-height:24px;color:#1f2937;font-weight:800;">
+                    Zürich (ZRH) →<br>Thessaloniki (SKG)
+                  </div>
+                  <div style="margin-top:4px;font-size:13px;line-height:18px;color:#6b7280;">
+                    Aegean
+                  </div>
+                  <div style="margin-top:10px;font-size:13px;line-height:20px;color:#334155;">🧳 Gepäck: 8&nbsp;kg&nbsp;+&nbsp;23&nbsp;kg (Aufpreis 70 CHF)</div>
+                  <div style="margin-top:4px;font-size:13px;line-height:20px;color:#334155;">✈️ Flugzeug: A320</div>
+                  <div style="margin-top:4px;font-size:13px;line-height:20px;color:#334155;">💳 Meilen: <strong>Miles&amp;More</strong> 775</div>
+                  <div style="margin-top:8px;font-size:12px;line-height:18px;color:#64748b;">
+                    Mögliche Reisedaten:<br>November 2025
+                  </div>
+                  <div style="margin-top:14px;font-size:22px;line-height:26px;color:#0ea5e9;font-weight:900;">ab CHF 99</div>
+                  <a href="https://skyscanner.pxf.io/xLM2zd" target="_blank"
+                     style="display:inline-block;background:#2264f5;color:#ffffff;text-decoration:none;font-size:13px;font-weight:700;padding:10px 18px;border-radius:12px;border:1px solid #1d4ed8;">
+                    Deal ansehen
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td></tr>
+          
+          <!-- ===================== DEAL 5 ===================== -->
+          <tr><td style="padding:10px 0;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"
+                   style="width:100%;border-radius:14px;background:#ffffff;border:1px solid #e2e8f0;box-shadow:0 1px 2px rgba(0,0,0,0.03);text-align:center;">
+              <tr>
+                <td style="padding:20px 16px;">
+                  <img src="https://www.worldatlas.com/upload/66/cb/c0/shutterstock-1679073004.jpg"
+                       width="160" height="100" alt="Zürich → Los Angeles"
+                       style="display:block;margin:0 auto;border-radius:12px;width:160px;height:100px;object-fit:cover;border:1px solid #e5e7eb;">
+                  <div style="margin-top:12px;font-size:18px;line-height:24px;color:#1f2937;font-weight:800;">
+                    Zürich (ZRH) →<br>Los Angeles (LAX)
+                  </div>
+                  <div style="margin-top:4px;font-size:13px;line-height:18px;color:#6b7280;">
+                    TAP Air Portugal / SAS
+                  </div>
+                  <div style="margin-top:10px;font-size:13px;line-height:20px;color:#334155;">🧳 Gepäck: 8&nbsp;kg&nbsp;+&nbsp;23&nbsp;kg (für 150 CHF)</div>
+                  <div style="margin-top:4px;font-size:13px;line-height:20px;color:#334155;">✈️ Flugzeug: A330neo</div>
+                  <div style="margin-top:4px;font-size:13px;line-height:20px;color:#334155;">💳 Meilen: <strong>Miles&amp;More</strong> ~3'300–6'700</div>
+                  <div style="margin-top:8px;font-size:12px;line-height:18px;color:#64748b;">
+                    Mögliche Reisedaten:<br>November 2025 – Mai 2026
+                  </div>
+                  <div style="margin-top:14px;font-size:22px;line-height:26px;color:#0ea5e9;font-weight:900;">ab CHF 405</div>
+                  <a href="https://skyscanner.pxf.io/RGQRa2" target="_blank"
+                     style="display:inline-block;background:#2264f5;color:#ffffff;text-decoration:none;font-size:13px;font-weight:700;padding:10px 18px;border-radius:12px;border:1px solid #1d4ed8;">
+                    Deal ansehen
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td></tr>
+          
+          </tbody>
+          </table>
               </div>
 
               <!-- Closing (centered as gewünscht) -->
