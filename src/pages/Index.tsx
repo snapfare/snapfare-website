@@ -186,9 +186,9 @@ const Index = () => {
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-                {/* Deal 1 (ohne Bildbeschriftung, kein großer Abstand) */}
-                <div className="bg-white/10 border border-white/20 rounded-lg p-0 flex flex-col hover:bg-white/15 transition-all duration-300 overflow-hidden">
-                  {/* Bild */}
+                {/* Deal 1 – endet ohne Leerraum unten */}
+                <div className="bg-white/10 border border-white/20 rounded-lg p-0 overflow-hidden hover:bg-white/15 transition-all duration-300">
+                  {/* Bild (kompakt) */}
                   <div className="relative h-28 sm:h-32 w-full">
                     <img
                       src="https://plus.unsplash.com/premium_photo-1697730061063-ad499e343f26?mark=https:%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&crop=faces%2Cedges&blend-w=1&blend=000000&blend-mode=normal&blend-alpha=10&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzI3OTA0OTYxfA&ixlib=rb-4.0.3"
@@ -197,39 +197,37 @@ const Index = () => {
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                    {/* Beschriftung entfernt */}
                   </div>
                 
-                  {/* Content + Preis: enger zusammenrücken */}
-                  <div className="p-4 flex flex-col gap-3">
-                    <div>
-                      <div className="flex items-center justify-center gap-2 mb-2">
-                        <span className="text-lg font-bold text-white">Zürich</span>
-                        <ArrowRight className="h-5 w-5 text-green-400" />
-                        <span className="text-lg font-bold text-white">Kapstadt</span>
-                      </div>
-                
-                      <div className="text-center mb-2">
-                        <div className="text-sm font-semibold text-white">Condor</div>
-                        <div className="text-sm text-gray-300">✈️Flugzeug: A330neo</div>
-                        <div className="text-sm text-gray-300">💳Reiseklasse: Economy</div>
-                        <div className="text-sm text-gray-300">🧳Gepäck: 8 kg</div>
-                      </div>
-                
-                      <div className="text-center">
-                        <div className="text-sm font-semibold text-white">Mögliche Reisedaten:</div>
-                        <div className="text-sm text-white">Winter 2025/26</div>
-                      </div>
+                  {/* Inhalt (keine flex-1 / justify-between, nur natürlicher Flow) */}
+                  <div className="p-4 space-y-3">
+                    <div className="flex items-center justify-center gap-2">
+                      <span className="text-lg font-bold text-white">Zürich</span>
+                      <ArrowRight className="h-5 w-5 text-green-400" />
+                      <span className="text-lg font-bold text-white">Kapstadt</span>
                     </div>
                 
-                    {/* Preis direkt anschließend, ohne großen Abstand */}
-                    <div className="text-center">
-                      <div className="text-[11px] text-gray-400 mb-0.5">Preis pro Person</div>
+                    <div className="text-center space-y-1.5">
+                      <div className="text-sm font-semibold text-white">Condor</div>
+                      <div className="text-sm text-gray-300">✈️Flugzeug: A330neo</div>
+                      <div className="text-sm text-gray-300">💳Reiseklasse: Economy</div>
+                      <div className="text-sm text-gray-300">🧳Gepäck: 8 kg</div>
+                    </div>
+                
+                    <div className="text-center space-y-1">
+                      <div className="text-sm font-semibold text-white">Mögliche Reisedaten:</div>
+                      <div className="text-sm text-white">Winter 2025/26</div>
+                    </div>
+                
+                    {/* Preis direkt danach, ohne extra Spacer */}
+                    <div className="text-center space-y-1">
+                      <div className="text-[11px] text-gray-400">Preis pro Person</div>
                       <div className="text-2xl font-bold text-green-400">CHF 430</div>
                       <div className="text-[11px] text-gray-400">inkl. Steuern & Gebühren</div>
                     </div>
                   </div>
                 </div>
+
 
                 {/* Deal 2 */}
                 <div className="bg-white/10 border border-white/20 rounded-lg p-0 flex flex-col hover:bg-white/15 transition-all duration-300 overflow-hidden">
