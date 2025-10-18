@@ -1,3 +1,8 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
 import { useState, useEffect } from 'react';
 import { Plane, Clock, Target, Bell, CreditCard, Shield, User, ArrowRight, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
