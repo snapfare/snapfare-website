@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Plane, Clock, Target, Bell, CreditCard, Shield, User, ArrowRight, Check } from 'lucide-react';
+import { Plane, Clock, Target, Bell, CreditCard, Shield, User, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
@@ -7,15 +7,72 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { toast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 
+type Deal = {
+  id: string;
+  from: string;
+  to: string;
+  airline: string;
+  aircraft: string;
+  travelClass: string;
+  baggage: string;
+  dates: string;
+  price: string;     // z.B. "CHF 430"
+  image: string;
+};
+
 const Index = () => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [userLocation, setUserLocation] = useState<string>('');
+
+  // Modal state + ausgewählter Deal
   const [isDealModalOpen, setIsDealModalOpen] = useState(false);
-  const [selectedDeal, setSelectedDeal] = useState<string | null>(null);
+  const [selectedDeal, setSelectedDeal] = useState<Deal | null>(null);
+
+  // >>> HIER deine Deals – alles, was du änderst, spiegelt sich automatisch im Pop-up wider
+  const deals: Deal[] = [
+    {
+      id: "CPT",
+      from: "Zürich",
+      to: "Kapstadt",
+      airline: "Condor",
+      aircraft: "A330neo",
+      travelClass: "Economy",
+      baggage: "8 kg",
+      dates: "Winter 2025/26",
+      price: "CHF 430",
+      image:
+        "https://plus.unsplash.com/premium_photo-1697730061063-ad499e343f26?mark=https:%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&crop=faces%2Cedges&blend-w=1&blend=000000&blend-mode=normal&blend-alpha=10&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzI3OTA0OTYxfA&ixlib=rb-4.0.3",
+    },
+    {
+      id: "IST",
+      from: "Zürich",
+      to: "Istanbul",
+      airline: "AJet (Turkish Airlines)",
+      aircraft: "Airbus A320",
+      travelClass: "Economy",
+      baggage: "Personal Item",
+      dates: "November – März 2026",
+      price: "CHF 60",
+      image:
+        "https://plus.unsplash.com/premium_photo-1661955588369-b0d28de38b45?blend=000000&blend-alpha=10&blend-mode=normal&blend-w=1&crop=faces%2Cedges&h=630&mark=https:%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-align=top%2Cleft&mark-pad=50&mark-w=64&w=1200&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzA3NzM2MDI3fA&ixlib=rb-4.0.3",
+    },
+    {
+      id: "SIN",
+      from: "Zürich",
+      to: "Singapur",
+      airline: "Turkish Airlines",
+      aircraft: "Airbus A350",
+      travelClass: "Economy",
+      baggage: "8 + 23 kg",
+      dates: "Oktober – Juni 2026",
+      price: "CHF 460",
+      image:
+        "https://images.unsplash.com/flagged/photo-1573460503891-d0f3a0803f38?blend=000000&blend-alpha=10&blend-mode=normal&blend-w=1&crop=faces%2Cedges&h=630&mark=https:%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-align=top%2Cleft&mark-pad=50&mark-w=64&w=1200&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzE0OTkxODI4fA&ixlib=rb-4.0.3",
+    },
+  ];
 
   useEffect(() => {
-    // Try to get user's location
     const getUserLocation = async () => {
       try {
         const response = await fetch('https://ipapi.co/json/');
@@ -30,8 +87,8 @@ const Index = () => {
     getUserLocation();
   }, []);
 
-  const openDealModal = (label: string) => {
-    setSelectedDeal(label);
+  const openDealModal = (deal: Deal) => {
+    setSelectedDeal(deal);
     setIsDealModalOpen(true);
   };
 
@@ -42,13 +99,18 @@ const Index = () => {
     setIsSubmitting(true);
 
     try {
+      const dealLabel =
+        selectedDeal
+          ? `${selectedDeal.from} → ${selectedDeal.to} (${selectedDeal.airline}) – ${selectedDeal.price}`
+          : null;
+
       const { error } = await supabase
         .from('waitlist')
         .insert([
           {
             email: email.trim().toLowerCase(),
             location: userLocation,
-            // source_deal: selectedDeal, // <— optional: nur nutzen, wenn Spalte existiert
+            // source_deal: dealLabel, // <-- Optional: Spalte vorher mit ALTER TABLE anlegen
           }
         ]);
 
@@ -57,18 +119,16 @@ const Index = () => {
         throw error;
       }
 
-      // Send confirmation email
       try {
         await supabase.functions.invoke('send-confirmation-email', {
           body: {
             email: email.trim().toLowerCase(),
             location: userLocation,
-            // source_deal: selectedDeal, // <— optional
+            // source_deal: dealLabel, // <-- Optional
           }
         });
       } catch (emailError) {
         console.error('Email sending error (non-blocking):', emailError);
-        // Don't block the success flow if email fails
       }
 
       toast({
@@ -77,7 +137,7 @@ const Index = () => {
       });
 
       setEmail('');
-      setIsDealModalOpen(false); // Modal nach Erfolg schließen
+      setIsDealModalOpen(false);
     } catch (error) {
       console.error('Error joining waitlist:', error);
       toast({
@@ -123,14 +183,6 @@ const Index = () => {
     }
   ];
 
-  const benefits = [
-    'Flugdeals direkt in deine Inbox',
-    'Preisüberwachung deiner Lieblingsdeals',
-    'Automatisierter Buchungsprozess',
-    'Premium: Businessdeals Langstrecke',
-    'Premium: Meilenschnäppchen ab Europa'
-  ];
-
   return (
     <div className="bg-slate-900">
       {/* Hero Section */}
@@ -162,7 +214,7 @@ const Index = () => {
               SnapFare scannt minütlich das Netz und liefert dir sofort jeden Flugdeal aufs Handy. Vollautomatisch, ohne Stress, ohne Preisprünge.
             </p>
 
-            {/* Waitlist Form */}
+            {/* Waitlist Form (Top) */}
             <form onSubmit={handleWaitlistSubmit} className="max-w-md mx-auto mb-8 sm:mb-12 px-4">
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Input
@@ -197,150 +249,68 @@ const Index = () => {
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-10 md:mb-14 lg:mb-16">
+                {deals.map((deal) => (
+                  <div
+                    key={deal.id}
+                    onClick={() => openDealModal(deal)}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`Deal öffnen: ${deal.from} nach ${deal.to}`}
+                    onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && openDealModal(deal)}
+                    className="bg-white/10 border border-white/20 rounded-lg p-0 flex flex-col hover:bg-white/15 transition-all duration-300 overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-green-500"
+                  >
+                    <div className="relative h-40 sm:h-44 w-full">
+                      <img src={deal.image} className="object-cover w-full h-full" loading="lazy" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                    </div>
 
-                {/* Deal 1 */}
-                <div
-                  onClick={() => openDealModal("Zürich → Kapstadt (Condor) – CHF 430")}
-                  role="button"
-                  tabIndex={0}
-                  aria-label="Deal öffnen: Zürich nach Kapstadt"
-                  onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && openDealModal("Zürich → Kapstadt (Condor) – CHF 430")}
-                  className="bg-white/10 border border-white/20 rounded-lg p-0 flex flex-col hover:bg-white/15 transition-all duration-300 overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-green-500"
-                >
-                  <div className="relative h-40 sm:h-44 w-full">
-                    <img
-                      src="https://plus.unsplash.com/premium_photo-1697730061063-ad499e343f26?mark=https:%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&crop=faces%2Cedges&blend-w=1&blend=000000&blend-mode=normal&blend-alpha=10&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzI3OTA0OTYxfA&ixlib=rb-4.0.3"
-                      className="object-cover w-full h-full"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center justify-center gap-3 mb-4">
-                        <span className="text-xl font-bold text-white">Zürich</span>
-                        <ArrowRight className="h-6 w-6 text-green-400" />
-                        <span className="text-xl font-bold text-white">Kapstadt</span>
-                      </div>
-                      <div className="text-center mb-4">
-                        <div className="text-xm font-semibold text-white">Condor</div>
-                        <div className="text-xm text-gray-300">✈️Flugzeug: A330neo</div>
-                        <div className="text-xm text-gray-300">💳Reiseklasse: Economy</div>
-                        <div className="text-xm text-gray-300">🧳Gepäck: 8 kg</div>
-                      </div>
-                      <div className="text-center mb-3">
-                        <div className="text-xm font-semibold text-white">Mögliche Reisedaten:</div>
-                        <div className="text-sm text-white">Winter 2025/26</div>
-                      </div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-xs text-gray-400 mb-1">Preis pro Person</div>
-                      <div className="text-3xl font-bold text-green-400">CHF 430</div>
-                      <div className="text-xs text-gray-400">inkl. Steuern & Gebühren</div>
-                    </div>
-                  </div>
-                </div>
+                    <div className="p-6 flex-1 flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-center justify-center gap-3 mb-4">
+                          <span className="text-xl font-bold text-white">{deal.from}</span>
+                          <ArrowRight className="h-6 w-6 text-green-400" />
+                          <span className="text-xl font-bold text-white">{deal.to}</span>
+                        </div>
 
-                {/* Deal 2 */}
-                <div
-                  onClick={() => openDealModal("Zürich → Istanbul (AJet/Turkish) – CHF 60")}
-                  role="button"
-                  tabIndex={0}
-                  aria-label="Deal öffnen: Zürich nach Istanbul"
-                  onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && openDealModal("Zürich → Istanbul (AJet/Turkish) – CHF 60")}
-                  className="bg-white/10 border border-white/20 rounded-lg p-0 flex flex-col hover:bg-white/15 transition-all duration-300 overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-green-500"
-                >
-                  <div className="relative h-40 sm:h-44 w-full">
-                    <img
-                      src="https://plus.unsplash.com/premium_photo-1661955588369-b0d28de38b45?blend=000000&blend-alpha=10&blend-mode=normal&blend-w=1&crop=faces%2Cedges&h=630&mark=https:%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-align=top%2Cleft&mark-pad=50&mark-w=64&w=1200&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzA3NzM2MDI3fA&ixlib=rb-4.0.3"
-                      className="object-cover w-full h-full"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center justify-center gap-3 mb-4">
-                        <span className="text-xl font-bold text-white">Zürich</span>
-                        <ArrowRight className="h-6 w-6 text-green-400" />
-                        <span className="text-xl font-bold text-white">Istanbul</span>
-                      </div>
-                      <div className="text-center mb-4">
-                        <div className="text-xm font-semibold text-white">AJet (Turkish Airlines)</div>
-                        <div className="text-xm text-gray-300">✈️Flugzeug: Airbus A320</div>
-                        <div className="text-xm text-gray-300">💳Reiseklasse: Economy</div>
-                        <div className="text-xm text-gray-300">🧳Gepäck: Personal Item</div>
-                      </div>
-                      <div className="text-center mb-3">
-                        <div className="text-xm font-semibold text-white">Mögliche Reisedaten:</div>
-                        <div className="text-sm text-white">November – März 2026</div>
-                      </div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-xs text-gray-400 mb-1">Preis pro Person</div>
-                      <div className="text-3xl font-bold text-green-400">CHF 60</div>
-                      <div className="text-xs text-gray-400">inkl. Steuern & Gebühren</div>
-                    </div>
-                  </div>
-                </div>
+                        <div className="text-center mb-4">
+                          <div className="text-xm font-semibold text-white">{deal.airline}</div>
+                          <div className="text-xm text-gray-300">✈️Flugzeug: {deal.aircraft}</div>
+                          <div className="text-xm text-gray-300">💳Reiseklasse: {deal.travelClass}</div>
+                          <div className="text-xm text-gray-300">🧳Gepäck: {deal.baggage}</div>
+                        </div>
 
-                {/* Deal 3 */}
-                <div
-                  onClick={() => openDealModal("Zürich → Singapur (Turkish Airlines) – CHF 460")}
-                  role="button"
-                  tabIndex={0}
-                  aria-label="Deal öffnen: Zürich nach Singapur"
-                  onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && openDealModal("Zürich → Singapur (Turkish Airlines) – CHF 460")}
-                  className="bg-white/10 border border-white/20 rounded-lg p-0 flex flex-col hover:bg-white/15 transition-all duration-300 overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-green-500"
-                >
-                  <div className="relative h-40 sm:h-44 w-full">
-                    <img
-                      src="https://images.unsplash.com/flagged/photo-1573460503891-d0f3a0803f38?blend=000000&blend-alpha=10&blend-mode=normal&blend-w=1&crop=faces%2Cedges&h=630&mark=https:%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-align=top%2Cleft&mark-pad=50&mark-w=64&w=1200&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzE0OTkxODI4fA&ixlib=rb-4.0.3"
-                      className="object-cover w-full h-full"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center justify-center gap-3 mb-4">
-                        <span className="text-xl font-bold text-white">Zürich</span>
-                        <ArrowRight className="h-6 w-6 text-green-400" />
-                        <span className="text-xl font-bold text-white">Singapur</span>
+                        <div className="text-center mb-3">
+                          <div className="text-xm font-semibold text-white">Mögliche Reisedaten:</div>
+                          <div className="text-sm text-white">{deal.dates}</div>
+                        </div>
                       </div>
-                      <div className="text-center mb-4">
-                        <div className="text-xm font-semibold text-white">Turkish Airlines</div>
-                        <div className="text-xm text-gray-300">✈️Flugzeug: Airbus A350</div>
-                        <div className="text-xm text-gray-300">💳Reiseklasse: Economy</div>
-                        <div className="text-xm text-gray-300">🧳Gepäck: 8 + 23 kg</div>
-                      </div>
-                      <div className="text-center mb-3">
-                        <div className="text-xm font-semibold text-white">Mögliche Reisedaten:</div>
-                        <div className="text-sm text-white">Oktober – Juni 2026</div>
-                      </div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-xs text-gray-400 mb-1">Preis pro Person</div>
-                      <div className="text-3xl font-bold text-green-400">CHF 460</div>
-                      <div className="text-xs text-gray-400">inkl. Steuern & Gebühren</div>
-                    </div>
-                  </div>
-                </div>
 
+                      <div className="text-center">
+                        <div className="text-xs text-gray-400 mb-1">Preis pro Person</div>
+                        <div className="text-3xl font-bold text-green-400">{deal.price}</div>
+                        <div className="text-xs text-gray-400">inkl. Steuern & Gebühren</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
 
               {/* Deal Modal (Popup) */}
               <Dialog open={isDealModalOpen} onOpenChange={setIsDealModalOpen}>
                 <DialogContent className="bg-slate-900 text-white border border-white/20">
                   <DialogHeader>
-                    <DialogTitle>Hol dir den Link zu folgendem Flugdeal:</DialogTitle>
+                    <DialogTitle>Hol dir den Link zum Deal</DialogTitle>
                     <DialogDescription className="text-gray-300">
-                      {selectedDeal && <span className="block mt-1">{selectedDeal}</span>}
+                      {selectedDeal && (
+                        <span className="block mt-1">
+                          {selectedDeal.from} → {selectedDeal.to} ({selectedDeal.airline}) – {selectedDeal.price}
+                        </span>
+                      )}
                     </DialogDescription>
                   </DialogHeader>
 
                   <p className="text-gray-300">
-                    Melde dich kurz an – wir schicken dir den Link zum Deal sowie alle weiteren Flugdeals alle zwei Wochen.
+                    Melde dich kurz an – wir schicken dir den Direktlink zum Deal sowie Updates zu ähnlichen Angeboten.
                   </p>
 
                   <form onSubmit={handleWaitlistSubmit} className="mt-4 flex flex-col sm:flex-row gap-3">
