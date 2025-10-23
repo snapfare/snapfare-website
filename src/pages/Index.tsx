@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Plane, Clock, Target, Bell, CreditCard, Shield, User, ArrowRight } from 'lucide-react';
+import { Plane, Clock, Target, Bell, CreditCard, Shield, User, ArrowRight, Bug } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
@@ -477,6 +477,22 @@ const Index = () => {
           </div>
         </div>
       </div>
+
+      {/* Floating "Found a bug?" CTA */}
+      <a
+        href="mailto:contact@basics-db.ch?subject=Found%20a%20bug%3F%20Get%20hired%21"
+        aria-label="Found a bug? Get hired! Email us"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 focus:outline-none focus:ring-2 focus:ring-green-500 rounded-full group"
+        rel="noopener noreferrer"
+      >
+        <div className="flex items-center gap-2 rounded-full px-4 py-2 bg-white/10 border border-white/20 backdrop-blur shadow-lg hover:bg-white/15 hover:border-white/30 transition-all">
+          <Bug className="h-4 w-4 text-green-400 group-hover:rotate-12 transition-transform" />
+          <span className="text-xs sm:text-sm text-white leading-tight">
+            <span className="font-semibold">Found a bug?</span>{' '}
+            <span className="text-gray-300">Get hired!</span>
+          </span>
+        </div>
+      </a>
     </div>
   );
 };
