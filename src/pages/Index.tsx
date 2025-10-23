@@ -299,7 +299,7 @@ const Index = () => {
               <Dialog open={isDealModalOpen} onOpenChange={setIsDealModalOpen}>
                 <DialogContent className="bg-slate-900 text-white border border-white/20">
                   <DialogHeader>
-                    <DialogTitle>Hol dir den Link zum folgenden Flugdeal:</DialogTitle>
+                    <DialogTitle>Hol dir den Link zu folgendem Flugdeal:</DialogTitle>
                     <DialogDescription className="text-gray-300">
                       {selectedDeal && (
                         <span className="block mt-1">
