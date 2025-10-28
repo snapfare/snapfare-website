@@ -169,7 +169,7 @@ const Index = () => {
     {
       icon: <CreditCard className="w-8 h-8" />,
       title: '1-Tap-Buchung',
-      description: 'Agent füllt alle Formulare aus, reserviert den Sitzplatz und zahlt automatisch.'
+      description: 'SnapFare füllt alle Formulare aus, reserviert den Sitzplatz und zahlt automatisch.'
     },
     {
       icon: <Shield className="w-8 h-8" />,
@@ -393,7 +393,7 @@ const Index = () => {
                       <span className="text-white font-bold text-lg sm:text-xl">2</span>
                     </div>
                     <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">Smart-Alert</h3>
-                    <p className="text-sm sm:text-base text-gray-300">Du erhältst eine Push-Nachricht mit Countdown und allen Details</p>
+                    <p className="text-sm sm:text-base text-gray-300">Du erhältst eine Push-Nachricht mit allen benötigten Details</p>
                   </div>
 
                   <div className="text-center">
@@ -401,7 +401,7 @@ const Index = () => {
                       <span className="text-white font-bold text-lg sm:text-xl">3</span>
                     </div>
                     <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">1-Tap-Buchung</h3>
-                    <p className="text-sm sm:text-base text-gray-300">Agent bucht automatisch, du zahlst mit Zahlungsmittel deiner Wahl</p>
+                    <p className="text-sm sm:text-base text-gray-300">SnapFare bucht automatisch, du zahlst mit Zahlungsmittel deiner Wahl</p>
                   </div>
 
                   <div className="text-center">
