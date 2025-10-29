@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Plane, Clock, Target, Bell, CreditCard, Shield, User, ArrowRight, Bug } from 'lucide-react';
+import {
+  Plane, Clock, Target, Bell, CreditCard, Shield, User, ArrowRight, Bug, Tiktok, Youtube
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { toast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
-import { Tiktok, Youtube } from 'lucide-react';
 
 type Deal = {
   id: string;
@@ -17,7 +18,7 @@ type Deal = {
   travelClass: string;
   baggage: string;
   dates: string;
-  price: string;     // z.B. "CHF 430"
+  price: string; // z.B. "CHF 430"
   image: string;
 };
 
@@ -30,46 +31,46 @@ const Index = () => {
   const [isDealModalOpen, setIsDealModalOpen] = useState(false);
   const [selectedDeal, setSelectedDeal] = useState<Deal | null>(null);
 
-  // >>> HIER deine Deals – alles, was du änderst, spiegelt sich automatisch im Pop-up wider
+  // >>> Deals – Änderungen spiegeln sich automatisch im Pop-up wider
   const deals: Deal[] = [
     {
-      id: "SYD",
-      from: "Zürich",
-      to: "Sydney",
-      airline: "Turkish Airlines",
-      aircraft: "Airbus A350",
-      travelClass: "Economy",
-      baggage: "23 kg",
-      dates: "Winter 2025/26",
-      price: "CHF 850",
+      id: 'SYD',
+      from: 'Zürich',
+      to: 'Sydney',
+      airline: 'Turkish Airlines',
+      aircraft: 'Airbus A350',
+      travelClass: 'Economy',
+      baggage: '23 kg',
+      dates: 'Winter 2025/26',
+      price: 'CHF 850',
       image:
-        "https://media.istockphoto.com/id/892808186/photo/sydney.jpg?b=1&s=170667a&w=0&k=20&c=ReC5-ifFV2q2Wvui520DjptF9RVMfoMjum7xObtS62w=",
+        'https://media.istockphoto.com/id/892808186/photo/sydney.jpg?b=1&s=170667a&w=0&k=20&c=ReC5-ifFV2q2Wvui520DjptF9RVMfoMjum7xObtS62w=',
     },
     {
-      id: "SHJ",
-      from: "Zürich",
-      to: "Dubai",
-      airline: "Turkish Airlines",
-      aircraft: "Boeing B737",
-      travelClass: "Economy",
-      baggage: "8 kg",
-      dates: "November – Dezember 2025",
-      price: "CHF 220",
+      id: 'SHJ',
+      from: 'Zürich',
+      to: 'Dubai',
+      airline: 'Turkish Airlines',
+      aircraft: 'Boeing B737',
+      travelClass: 'Economy',
+      baggage: '8 kg',
+      dates: 'November – Dezember 2025',
+      price: 'CHF 220',
       image:
-        "https://images.unsplash.com/photo-1542544499-bce9dc3bb4e8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9",
+        'https://images.unsplash.com/photo-1542544499-bce9dc3bb4e8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9',
     },
     {
-      id: "PUJ",
-      from: "Zürich",
-      to: "Punta Cana",
-      airline: "Condor",
-      aircraft: "Airbus A330neo",
-      travelClass: "Economy",
-      baggage: "8 kg",
-      dates: "November – Juni 2026",
-      price: "CHF 600",
+      id: 'PUJ',
+      from: 'Zürich',
+      to: 'Punta Cana',
+      airline: 'Condor',
+      aircraft: 'Airbus A330neo',
+      travelClass: 'Economy',
+      baggage: '8 kg',
+      dates: 'November – Juni 2026',
+      price: 'CHF 600',
       image:
-        "https://media.istockphoto.com/id/1315005752/photo/paradise-tropical-island-nature-background-top-aerial-drone-view-of-beautiful-beach-with.jpg?b=1&s=170667a&w=0&k=20&c=T6OsJaP3n2vaXld7xbgIconb6RKQouF96zsMmIt5r-M=",
+        'https://media.istockphoto.com/id/1315005752/photo/paradise-tropical-island-nature-background-top-aerial-drone-view-of-beautiful-beach-with.jpg?b=1&s=170667a&w=0&k=20&c=T6OsJaP3n2vaXld7xbgIconb6RKQouF96zsMmIt5r-M=',
     },
   ];
 
@@ -100,20 +101,17 @@ const Index = () => {
     setIsSubmitting(true);
 
     try {
-      const dealLabel =
-        selectedDeal
-          ? `${selectedDeal.from} → ${selectedDeal.to} (${selectedDeal.airline}) – ${selectedDeal.price}`
-          : null;
+      const dealLabel = selectedDeal
+        ? `${selectedDeal.from} → ${selectedDeal.to} (${selectedDeal.airline}) – ${selectedDeal.price}`
+        : null;
 
-      const { error } = await supabase
-        .from('waitlist')
-        .insert([
-          {
-            email: email.trim().toLowerCase(),
-            location: userLocation,
-            // source_deal: dealLabel, // <-- Optional: Spalte vorher mit ALTER TABLE anlegen
-          }
-        ]);
+      const { error } = await supabase.from('waitlist').insert([
+        {
+          email: email.trim().toLowerCase(),
+          location: userLocation,
+          // source_deal: dealLabel, // <-- Optional: Spalte vorher mit ALTER TABLE anlegen
+        },
+      ]);
 
       if (error) {
         console.error('Waitlist error:', error);
@@ -126,7 +124,7 @@ const Index = () => {
             email: email.trim().toLowerCase(),
             location: userLocation,
             // source_deal: dealLabel, // <-- Optional
-          }
+          },
         });
       } catch (emailError) {
         console.error('Email sending error (non-blocking):', emailError);
@@ -134,7 +132,7 @@ const Index = () => {
 
       toast({
         title: 'Erfolgreich angemeldet! 🎉',
-        description: 'Du hast es geschafft - wir werden dir bald weitere Informationen zukommen lassen.'
+        description: 'Du hast es geschafft - wir werden dir bald weitere Informationen zukommen lassen.',
       });
 
       setEmail('');
@@ -144,7 +142,7 @@ const Index = () => {
       toast({
         title: 'Fehler beim Anmelden',
         description: 'Bitte versuche es noch einmal. Falls das Problem bestehen bleibt, kontaktiere uns.',
-        variant: 'destructive'
+        variant: 'destructive',
       });
     } finally {
       setIsSubmitting(false);
@@ -155,38 +153,38 @@ const Index = () => {
     {
       icon: <Clock className="w-8 h-8" />,
       title: 'Echtzeit-Deal-Radar',
-      description: 'Scannt minütlich das Internet nach Flugdeals und benachrichtigt dich sofort.'
+      description: 'Scannt minütlich das Internet nach Flugdeals und benachrichtigt dich sofort.',
     },
     {
       icon: <Target className="w-8 h-8" />,
       title: 'Preference-Match-Engine',
-      description: 'Gleicht automatisch Heimatflughafen, Budget, Reisefenster und Wetter mit jedem Deal ab.'
+      description: 'Gleicht automatisch Heimatflughafen, Budget, Reisefenster und Wetter mit jedem Deal ab.',
     },
     {
       icon: <Bell className="w-8 h-8" />,
       title: 'Smart-Alert System',
-      description: 'Eine einzige Push-Nachricht statt Spam-Flut – nur bei perfekten Matches.'
+      description: 'Eine einzige Push-Nachricht statt Spam-Flut – nur bei perfekten Matches.',
     },
     {
       icon: <CreditCard className="w-8 h-8" />,
       title: '1-Tap-Buchung',
-      description: 'SnapFare füllt alle Formulare aus, reserviert den Sitzplatz und zahlt automatisch.'
+      description: 'SnapFare füllt alle Formulare aus, reserviert den Sitzplatz und zahlt automatisch.',
     },
     {
       icon: <Shield className="w-8 h-8" />,
       title: 'Price-Guard Monitor',
-      description: 'Überwacht Tarife nach der Buchung und fordert automatisch Erstattungen bei Preisstürzen an.'
+      description: 'Überwacht Tarife nach der Buchung und fordert automatisch Erstattungen bei Preisstürzen an.',
     },
     {
       icon: <User className="w-8 h-8" />,
       title: 'Post-Trip-Assistent',
-      description: 'Erledigt Umbuchungen, Visa-Checks und Check-in-Links – vollautomatisch und stressfrei.'
-    }
+      description: 'Erledigt Umbuchungen, Visa-Checks und Check-in-Links – vollautomatisch und stressfrei.',
+    },
   ];
 
   const socialLinks = [
-  { href: 'https://www.tiktok.com/@snapfare', label: 'TikTok', Icon: Tiktok },
-  { href: 'https://www.youtube.com/@snapfare_ch', label: 'YouTube', Icon: Youtube },
+    { href: 'https://www.tiktok.com/@snapfare', label: 'TikTok', Icon: Tiktok },
+    { href: 'https://www.youtube.com/@snapfare_ch', label: 'YouTube', Icon: Youtube },
   ];
 
   return (
@@ -279,14 +277,14 @@ const Index = () => {
                         </div>
 
                         <div className="text-center mb-4">
-                          <div className="text-xm font-semibold text-white">{deal.airline}</div>
-                          <div className="text-xm text-gray-300">✈️Flugzeug: {deal.aircraft}</div>
-                          <div className="text-xm text-gray-300">💳Reiseklasse: {deal.travelClass}</div>
-                          <div className="text-xm text-gray-300">🧳Gepäck: {deal.baggage}</div>
+                          <div className="text-sm font-semibold text-white">{deal.airline}</div>
+                          <div className="text-sm text-gray-300">✈️Flugzeug: {deal.aircraft}</div>
+                          <div className="text-sm text-gray-300">💳Reiseklasse: {deal.travelClass}</div>
+                          <div className="text-sm text-gray-300">🧳Gepäck: {deal.baggage}</div>
                         </div>
 
                         <div className="text-center mb-3">
-                          <div className="text-xm font-semibold text-white">Mögliche Reisedaten:</div>
+                          <div className="text-sm font-semibold text-white">Mögliche Reisedaten:</div>
                           <div className="text-sm text-white">{deal.dates}</div>
                         </div>
                       </div>
@@ -353,10 +351,7 @@ const Index = () => {
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12 sm:mb-16 lg:mb-20">
                   <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 px-4">
-                    So funktioniert die{' '}
-                    <p>
-                      <span className="text-green-400">bevorstehende Automatisierung</span>
-                    </p>
+                    So funktioniert die <span className="text-green-400">bevorstehende Automatisierung</span>
                   </h2>
                 </div>
 
@@ -443,7 +438,7 @@ const Index = () => {
                       className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 h-12 px-6 sm:px-8 text-sm sm:text-base whitespace-nowrap"
                     >
                       {isSubmitting ? (
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white" />
                       ) : (
                         <>
                           Anmelden! <Plane className="ml-2 h-4 w-4" />
@@ -463,7 +458,7 @@ const Index = () => {
                     <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
                       SnapFare
                     </span>
-                  
+
                     {/* Social Icons */}
                     <div className="flex items-center gap-3">
                       {socialLinks.map(({ href, label, Icon }) => (
