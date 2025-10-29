@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { toast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import { Tiktok, Youtube } from 'lucide-react';
 
 type Deal = {
   id: string;
@@ -181,6 +182,11 @@ const Index = () => {
       title: 'Post-Trip-Assistent',
       description: 'Erledigt Umbuchungen, Visa-Checks und Check-in-Links – vollautomatisch und stressfrei.'
     }
+  ];
+
+  const socialLinks = [
+  { href: 'https://www.tiktok.com/@snapfare', label: 'TikTok', Icon: Tiktok },
+  { href: 'https://www.youtube.com/@snapfare_ch', label: 'YouTube', Icon: Youtube },
   ];
 
   return (
@@ -453,10 +459,32 @@ const Index = () => {
             <footer className="bg-slate-900 py-8 sm:py-12 relative left-1/2 right-1/2 -mx-[50vw] w-screen">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                  <div className="flex items-center gap-3 mb-4 md:mb-0">
+                  <div className="flex items-center gap-5 mb-4 md:mb-0">
                     <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
                       SnapFare
                     </span>
+                  
+                    {/* Social Icons */}
+                    <div className="flex items-center gap-3">
+                      {socialLinks.map(({ href, label, Icon }) => (
+                        <a
+                          key={label}
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={label}
+                          title={label}
+                          className="inline-flex h-10 w-10 items-center justify-center rounded-xl
+                                     bg-white/5 border border-white/10
+                                     hover:bg-white/10 hover:border-white/20
+                                     transition-all hover:scale-105 hover:shadow-lg
+                                     focus:outline-none focus:ring-2 focus:ring-green-500/40"
+                        >
+                          <Icon className="h-5 w-5 text-white" />
+                          <span className="sr-only">{label}</span>
+                        </a>
+                      ))}
+                    </div>
                   </div>
 
                   <div className="flex flex-col sm:flex-row items-center gap-4 text-center">
