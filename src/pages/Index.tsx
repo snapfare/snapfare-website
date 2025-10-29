@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
-  Plane, Clock, Target, Bell, CreditCard, Shield, User, ArrowRight, Bug, Tiktok, Youtube
+  Plane, Clock, Target, Bell, CreditCard, Shield, User, ArrowRight, Bug, Youtube
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -18,9 +18,20 @@ type Deal = {
   travelClass: string;
   baggage: string;
   dates: string;
-  price: string; // z.B. "CHF 430"
+  price: string;     // z.B. "CHF 430"
   image: string;
 };
+
+/** Inline TikTok Icon (kein externes Icon nötig) */
+const TikTokIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 24 24" aria-hidden="true" role="img" {...props}>
+    {/* stilisierter Musiknoten-Logo-Look, monochrom */}
+    <path
+      fill="currentColor"
+      d="M14 3v6.2a4.8 4.8 0 1 1-2-3.9V5h4.2A6 6 0 0 0 20 8v3a8 8 0 0 1-6-2.2V14a5.5 5.5 0 1 1-2.5-4.6V3h2.5Z"
+    />
+  </svg>
+);
 
 const Index = () => {
   const [email, setEmail] = useState('');
@@ -31,46 +42,46 @@ const Index = () => {
   const [isDealModalOpen, setIsDealModalOpen] = useState(false);
   const [selectedDeal, setSelectedDeal] = useState<Deal | null>(null);
 
-  // >>> Deals – Änderungen spiegeln sich automatisch im Pop-up wider
+  // >>> HIER deine Deals – alles, was du änderst, spiegelt sich automatisch im Pop-up wider
   const deals: Deal[] = [
     {
-      id: 'SYD',
-      from: 'Zürich',
-      to: 'Sydney',
-      airline: 'Turkish Airlines',
-      aircraft: 'Airbus A350',
-      travelClass: 'Economy',
-      baggage: '23 kg',
-      dates: 'Winter 2025/26',
-      price: 'CHF 850',
+      id: "SYD",
+      from: "Zürich",
+      to: "Sydney",
+      airline: "Turkish Airlines",
+      aircraft: "Airbus A350",
+      travelClass: "Economy",
+      baggage: "23 kg",
+      dates: "Winter 2025/26",
+      price: "CHF 850",
       image:
-        'https://media.istockphoto.com/id/892808186/photo/sydney.jpg?b=1&s=170667a&w=0&k=20&c=ReC5-ifFV2q2Wvui520DjptF9RVMfoMjum7xObtS62w=',
+        "https://media.istockphoto.com/id/892808186/photo/sydney.jpg?b=1&s=170667a&w=0&k=20&c=ReC5-ifFV2q2Wvui520DjptF9RVMfoMjum7xObtS62w=",
     },
     {
-      id: 'SHJ',
-      from: 'Zürich',
-      to: 'Dubai',
-      airline: 'Turkish Airlines',
-      aircraft: 'Boeing B737',
-      travelClass: 'Economy',
-      baggage: '8 kg',
-      dates: 'November – Dezember 2025',
-      price: 'CHF 220',
+      id: "SHJ",
+      from: "Zürich",
+      to: "Dubai",
+      airline: "Turkish Airlines",
+      aircraft: "Boeing B737",
+      travelClass: "Economy",
+      baggage: "8 kg",
+      dates: "November – Dezember 2025",
+      price: "CHF 220",
       image:
-        'https://images.unsplash.com/photo-1542544499-bce9dc3bb4e8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9',
+        "https://images.unsplash.com/photo-1542544499-bce9dc3bb4e8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9",
     },
     {
-      id: 'PUJ',
-      from: 'Zürich',
-      to: 'Punta Cana',
-      airline: 'Condor',
-      aircraft: 'Airbus A330neo',
-      travelClass: 'Economy',
-      baggage: '8 kg',
-      dates: 'November – Juni 2026',
-      price: 'CHF 600',
+      id: "PUJ",
+      from: "Zürich",
+      to: "Punta Cana",
+      airline: "Condor",
+      aircraft: "Airbus A330neo",
+      travelClass: "Economy",
+      baggage: "8 kg",
+      dates: "November – Juni 2026",
+      price: "CHF 600",
       image:
-        'https://media.istockphoto.com/id/1315005752/photo/paradise-tropical-island-nature-background-top-aerial-drone-view-of-beautiful-beach-with.jpg?b=1&s=170667a&w=0&k=20&c=T6OsJaP3n2vaXld7xbgIconb6RKQouF96zsMmIt5r-M=',
+        "https://media.istockphoto.com/id/1315005752/photo/paradise-tropical-island-nature-background-top-aerial-drone-view-of-beautiful-beach-with.jpg?b=1&s=170667a&w=0&k=20&c=T6OsJaP3n2vaXld7xbgIconb6RKQouF96zsMmIt5r-M=",
     },
   ];
 
@@ -101,17 +112,20 @@ const Index = () => {
     setIsSubmitting(true);
 
     try {
-      const dealLabel = selectedDeal
-        ? `${selectedDeal.from} → ${selectedDeal.to} (${selectedDeal.airline}) – ${selectedDeal.price}`
-        : null;
+      const dealLabel =
+        selectedDeal
+          ? `${selectedDeal.from} → ${selectedDeal.to} (${selectedDeal.airline}) – ${selectedDeal.price}`
+          : null;
 
-      const { error } = await supabase.from('waitlist').insert([
-        {
-          email: email.trim().toLowerCase(),
-          location: userLocation,
-          // source_deal: dealLabel, // <-- Optional: Spalte vorher mit ALTER TABLE anlegen
-        },
-      ]);
+      const { error } = await supabase
+        .from('waitlist')
+        .insert([
+          {
+            email: email.trim().toLowerCase(),
+            location: userLocation,
+            // source_deal: dealLabel, // <-- Optional: Spalte vorher mit ALTER TABLE anlegen
+          }
+        ]);
 
       if (error) {
         console.error('Waitlist error:', error);
@@ -124,7 +138,7 @@ const Index = () => {
             email: email.trim().toLowerCase(),
             location: userLocation,
             // source_deal: dealLabel, // <-- Optional
-          },
+          }
         });
       } catch (emailError) {
         console.error('Email sending error (non-blocking):', emailError);
@@ -132,7 +146,7 @@ const Index = () => {
 
       toast({
         title: 'Erfolgreich angemeldet! 🎉',
-        description: 'Du hast es geschafft - wir werden dir bald weitere Informationen zukommen lassen.',
+        description: 'Du hast es geschafft - wir werden dir bald weitere Informationen zukommen lassen.'
       });
 
       setEmail('');
@@ -142,7 +156,7 @@ const Index = () => {
       toast({
         title: 'Fehler beim Anmelden',
         description: 'Bitte versuche es noch einmal. Falls das Problem bestehen bleibt, kontaktiere uns.',
-        variant: 'destructive',
+        variant: 'destructive'
       });
     } finally {
       setIsSubmitting(false);
@@ -153,37 +167,37 @@ const Index = () => {
     {
       icon: <Clock className="w-8 h-8" />,
       title: 'Echtzeit-Deal-Radar',
-      description: 'Scannt minütlich das Internet nach Flugdeals und benachrichtigt dich sofort.',
+      description: 'Scannt minütlich das Internet nach Flugdeals und benachrichtigt dich sofort.'
     },
     {
       icon: <Target className="w-8 h-8" />,
       title: 'Preference-Match-Engine',
-      description: 'Gleicht automatisch Heimatflughafen, Budget, Reisefenster und Wetter mit jedem Deal ab.',
+      description: 'Gleicht automatisch Heimatflughafen, Budget, Reisefenster und Wetter mit jedem Deal ab.'
     },
     {
       icon: <Bell className="w-8 h-8" />,
       title: 'Smart-Alert System',
-      description: 'Eine einzige Push-Nachricht statt Spam-Flut – nur bei perfekten Matches.',
+      description: 'Eine einzige Push-Nachricht statt Spam-Flut – nur bei perfekten Matches.'
     },
     {
       icon: <CreditCard className="w-8 h-8" />,
       title: '1-Tap-Buchung',
-      description: 'SnapFare füllt alle Formulare aus, reserviert den Sitzplatz und zahlt automatisch.',
+      description: 'SnapFare füllt alle Formulare aus, reserviert den Sitzplatz und zahlt automatisch.'
     },
     {
       icon: <Shield className="w-8 h-8" />,
       title: 'Price-Guard Monitor',
-      description: 'Überwacht Tarife nach der Buchung und fordert automatisch Erstattungen bei Preisstürzen an.',
+      description: 'Überwacht Tarife nach der Buchung und fordert automatisch Erstattungen bei Preisstürzen an.'
     },
     {
       icon: <User className="w-8 h-8" />,
       title: 'Post-Trip-Assistent',
-      description: 'Erledigt Umbuchungen, Visa-Checks und Check-in-Links – vollautomatisch und stressfrei.',
-    },
+      description: 'Erledigt Umbuchungen, Visa-Checks und Check-in-Links – vollautomatisch und stressfrei.'
+    }
   ];
 
   const socialLinks = [
-    { href: 'https://www.tiktok.com/@snapfare', label: 'TikTok', Icon: Tiktok },
+    { href: 'https://www.tiktok.com/@snapfare', label: 'TikTok', Icon: TikTokIcon },
     { href: 'https://www.youtube.com/@snapfare_ch', label: 'YouTube', Icon: Youtube },
   ];
 
@@ -225,7 +239,7 @@ const Index = () => {
                   type="email"
                   placeholder="Deine E-Mail-Adresse"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target value)}
                   required
                   className="flex-1 bg-white/10 border-white/20 text-white placeholder:text-gray-400 h-12 text-base"
                 />
@@ -277,14 +291,14 @@ const Index = () => {
                         </div>
 
                         <div className="text-center mb-4">
-                          <div className="text-sm font-semibold text-white">{deal.airline}</div>
-                          <div className="text-sm text-gray-300">✈️Flugzeug: {deal.aircraft}</div>
-                          <div className="text-sm text-gray-300">💳Reiseklasse: {deal.travelClass}</div>
-                          <div className="text-sm text-gray-300">🧳Gepäck: {deal.baggage}</div>
+                          <div className="text-xm font-semibold text-white">{deal.airline}</div>
+                          <div className="text-xm text-gray-300">✈️Flugzeug: {deal.aircraft}</div>
+                          <div className="text-xm text-gray-300">💳Reiseklasse: {deal.travelClass}</div>
+                          <div className="text-xm text-gray-300">🧳Gepäck: {deal.baggage}</div>
                         </div>
 
                         <div className="text-center mb-3">
-                          <div className="text-sm font-semibold text-white">Mögliche Reisedaten:</div>
+                          <div className="text-xm font-semibold text-white">Mögliche Reisedaten:</div>
                           <div className="text-sm text-white">{deal.dates}</div>
                         </div>
                       </div>
@@ -438,7 +452,7 @@ const Index = () => {
                       className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 h-12 px-6 sm:px-8 text-sm sm:text-base whitespace-nowrap"
                     >
                       {isSubmitting ? (
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white" />
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
                       ) : (
                         <>
                           Anmelden! <Plane className="ml-2 h-4 w-4" />
@@ -459,26 +473,39 @@ const Index = () => {
                       SnapFare
                     </span>
 
-                    {/* Social Icons */}
+                    {/* Social Icons (TikTok = Inline SVG, YouTube = lucide) */}
                     <div className="flex items-center gap-3">
-                      {socialLinks.map(({ href, label, Icon }) => (
-                        <a
-                          key={label}
-                          href={href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={label}
-                          title={label}
-                          className="inline-flex h-10 w-10 items-center justify-center rounded-xl
-                                     bg-white/5 border border-white/10
-                                     hover:bg-white/10 hover:border-white/20
-                                     transition-all hover:scale-105 hover:shadow-lg
-                                     focus:outline-none focus:ring-2 focus:ring-green-500/40"
-                        >
-                          <Icon className="h-5 w-5 text-white" />
-                          <span className="sr-only">{label}</span>
-                        </a>
-                      ))}
+                      <a
+                        href="https://www.tiktok.com/@snapfare"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="TikTok"
+                        title="TikTok"
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-xl
+                                   bg-white/5 border border-white/10
+                                   hover:bg-white/10 hover:border-white/20
+                                   transition-all hover:scale-105 hover:shadow-lg
+                                   focus:outline-none focus:ring-2 focus:ring-green-500/40"
+                      >
+                        <TikTokIcon className="h-5 w-5 text-white" />
+                        <span className="sr-only">TikTok</span>
+                      </a>
+
+                      <a
+                        href="https://www.youtube.com/@snapfare_ch"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="YouTube"
+                        title="YouTube"
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-xl
+                                   bg-white/5 border border-white/10
+                                   hover:bg-white/10 hover:border-white/20
+                                   transition-all hover:scale-105 hover:shadow-lg
+                                   focus:outline-none focus:ring-2 focus:ring-green-500/40"
+                      >
+                        <Youtube className="h-5 w-5 text-white" />
+                        <span className="sr-only">YouTube</span>
+                      </a>
                     </div>
                   </div>
 
