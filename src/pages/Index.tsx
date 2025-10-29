@@ -239,7 +239,7 @@ const Index = () => {
                   type="email"
                   placeholder="Deine E-Mail-Adresse"
                   value={email}
-                  onChange={(e) => setEmail(e.target value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                   className="flex-1 bg-white/10 border-white/20 text-white placeholder:text-gray-400 h-12 text-base"
                 />
