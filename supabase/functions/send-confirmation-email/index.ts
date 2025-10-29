@@ -1,15 +1,15 @@
-// send-confirmation-email.ts
-// Updated: 2025-10-29 — Edge-safe Resend via fetch + Deno.serve
-
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-};
+// supabase/functions/send-confirmation-email/index.ts
+// Updated: 2025-10-29 — Deno Edge-safe: Resend via fetch + Deno.serve (no npm SDK)
 
 interface ConfirmationEmailRequest {
   email: string;
   location?: string;
 }
+
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+};
 
 function json(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -19,7 +19,7 @@ function json(body: unknown, status = 200) {
 }
 
 function buildHtml(): string {
-  // ---- Your LIGHT THEME email (unchanged content; only moved into a function) ----
+  // ---- LIGHT THEME EMAIL HTML ----
   return `<!DOCTYPE html>
 <html>
 <head>
@@ -186,15 +186,37 @@ function buildHtml(): string {
   </div>
 </body>
 </html>`;
-  // ---- end email ----
+  // ---- end email HTML ----
 }
 
-async function sendWithResend(apiKey: string, to: string, html: string) {
+function buildText(): string {
+  // Plain-text fallback for old clients
+  return [
+    "Willkommen bei SnapFare! 🎉",
+    "",
+    "Vollautomatisierte Schnäppchenjagd – danke für deine Anmeldung.",
+    "",
+    "Aktuelle Deals (Auszug):",
+    "- Zürich → Sydney ab CHF 850",
+    "- Zürich → Dubai (SHJ) ab CHF 220",
+    "- Zürich → Punta Cana ab CHF 600",
+    "- Zürich → Malta ab CHF 130",
+    "- Zürich → Dallas ab CHF 420",
+    "",
+    "Preise und Verfügbarkeiten können sich schnell ändern.",
+    "",
+    "Bis bald und vielen Dank für dein Vertrauen!",
+    "— Das SnapFare Team",
+  ].join("\n");
+}
+
+async function sendWithResend(apiKey: string, to: string, html: string, text: string) {
   const payload = {
     from: "SnapFare <noreply@basics-db.ch>",
     to: [to],
     subject: "Willkommen bei SnapFare! 🎉",
     html,
+    text,
   };
 
   const res = await fetch("https://api.resend.com/emails", {
@@ -206,9 +228,9 @@ async function sendWithResend(apiKey: string, to: string, html: string) {
     body: JSON.stringify(payload),
   });
 
-  const text = await res.text();
+  const raw = await res.text();
   let data: unknown;
-  try { data = JSON.parse(text); } catch { data = text; }
+  try { data = JSON.parse(raw); } catch { data = raw; }
 
   if (!res.ok) {
     throw new Error(typeof data === "string" ? data : JSON.stringify(data));
@@ -216,7 +238,7 @@ async function sendWithResend(apiKey: string, to: string, html: string) {
   return data;
 }
 
-// Edge-native server (no std import needed)
+// Edge-native server (no std import needed, no npm deps)
 Deno.serve(async (req) => {
   // CORS preflight
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
@@ -234,7 +256,8 @@ Deno.serve(async (req) => {
     console.log(`[send-confirmation-email] to=${email} loc=${location ?? "Unknown"}`);
 
     const html = buildHtml();
-    const data = await sendWithResend(apiKey, email, html);
+    const text = buildText();
+    const data = await sendWithResend(apiKey, email, html, text);
 
     return json({ success: true, data }, 200);
   } catch (error: any) {
