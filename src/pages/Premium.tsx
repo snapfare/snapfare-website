@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import twintButton from "@/assets/twint-button.svg";
 
-const TWINT_LINK = "https://go.twint.ch/1/e/tw?tw=acq.gLWaSc6qS9WXTyve02qU3TYzXh6aJj-WV-OoE_J4WpK9fVqgx8XwDgLVcKKthvDk.&amount=49.00&trxInfo=SNAPFARE_PREMIUM_1Y"; // <-- deinen echten TWINT-Link einsetzen
+const TWINT_LINK = "https://go.twint.ch/1/e/tw?tw=acq.gLWaSc6qS9WXTyve02qU3TYzXh6aJj-WV-OoE_J4WpK9fVqgx8XwDgLVcKKthvDk.&amount=39.00&trxInfo=BLACKFRIDAY_PREMIUM_1Y"; // <-- deinen echten TWINT-Link einsetzen
 
 const Premium = () => {
   const [email, setEmail] = useState("");
