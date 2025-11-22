@@ -121,10 +121,30 @@ const Premium = () => {
               </div>
               
               <div className="text-center mb-8">
+              
+                {/* Black Friday Badge */}
+                <div className="flex justify-center mb-2">
+                  <span className="bg-green-400 text-black text-xs font-semibold px-3 py-1 rounded-full">
+                    Black Friday Deal
+                  </span>
+                </div>
+              
                 <h3 className="text-2xl font-bold mb-2 text-white">Premium</h3>
-                <div className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent mb-2">CHF 49</div>
+              
+                {/* Neuer Preis */}
+                <div className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent mb-1">
+                  CHF 39
+                </div>
+              
+                {/* Alte Preise kompakt in EINER Zeile */}
+                <p className="text-gray-400 text-sm mb-1">
+                  <span className="line-through">CHF 79</span> (-50%) ·
+                  <span className="line-through ml-1">CHF 49</span> (-20% Early Bird)
+                </p>
+              
                 <p className="text-gray-300">Pro Jahr</p>
               </div>
+
               
               <ul className="space-y-4 mb-8">
                 <li className="flex items-center gap-3">
