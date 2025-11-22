@@ -131,9 +131,12 @@ const Premium = () => {
               
                 <h3 className="text-2xl font-bold mb-2 text-white">Premium</h3>
               
-                {/* Neuer Preis */}
-                <div className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent mb-2">
-                  CHF 39
+                {/* Preis + Pro Jahr in einer Zeile */}
+                <div className="flex justify-center items-end gap-2 mb-2">
+                  <span className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+                    CHF 39
+                  </span>
+                  <span className="text-sm text-gray-300 mb-1">Pro Jahr</span>
                 </div>
               
                 {/* Zweizeilige Rabattinfo */}
@@ -146,8 +149,8 @@ const Premium = () => {
                   </p>
                 </div>
               
-                <p className="text-gray-300">Pro Jahr</p>
               </div>
+
               
               <ul className="space-y-4 mb-8">
                 <li className="flex items-center gap-3">
