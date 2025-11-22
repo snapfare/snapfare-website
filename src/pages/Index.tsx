@@ -15,7 +15,7 @@ type Deal = {
   from: string;
   to: string;
   airline: string;
-  aircraft: string;
+  airtime: string;
   travelClass: string;
   baggage: string;
   dates: string;
@@ -35,43 +35,43 @@ const Index = () => {
   // Deals
   const deals: Deal[] = [
     {
-      id: "AKL",
+      id: "MLE",
       from: "Zürich",
-      to: "Neuseeland",
-      airline: "Turkish Airlines",
-      aircraft: "Airbus A350",
-      travelClass: "Economy",
-      baggage: "30 kg",
-      dates: "Frühling 2026",
-      price: "CHF 650",
-      image:
-        "https://media.istockphoto.com/photos/auckland-cityscape-new-zealand-colorful-sunset-twilight-picture-id1200028446?b=1&k=20&m=1200028446&s=170667a&w=0&h=uceuLorB8kMs19ZCFqYTtukD-PIidrsho_N23kspVLA=",
-    },
-    {
-      id: "BCN",
-      from: "Zürich",
-      to: "Barcelona",
-      airline: "Vueling",
-      aircraft: "Airbus A321",
-      travelClass: "Economy",
-      baggage: "8 kg",
-      dates: "Januar – März 2026",
-      price: "CHF 59",
-      image:
-        "https://media.istockphoto.com/photos/sagrada-familia-barcelona-spain-picture-id1060311174?b=1&k=20&m=1060311174&s=170667a&w=0&h=-2CHyAFTfWNx6pPcIJkpA-UfthQQdXfLGMfDhUEVIQg=",
-    },
-    {
-      id: "CPT",
-      from: "Zürich",
-      to: "Kapstadt",
+      to: "Malediven",
       airline: "Condor",
-      aircraft: "Airbus A330neo",
+      airtime: "13 Stunden",
       travelClass: "Economy",
-      baggage: "8 kg",
-      dates: "Frühling 2026",
-      price: "CHF 450",
+      baggage: "8 + 20 kg",
+      dates: "Winter 2025/2026",
+      price: "CHF 505",
       image:
-        "https://media.istockphoto.com/id/836210722/photo/cape-town-panorama.jpg?b=1&s=170667a&w=0&k=20&c=be-XOmYVGTh_BO4w2viHWIGQPhCGHdzN-8behT30bfw=",
+        "https://images.unsplash.com/photo-1674718320543-a7c80472059b?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      id: "JNB",
+      from: "Zürich",
+      to: "Johannesburg",
+      airline: "Condor",
+      airtime: "14 Stunden",
+      travelClass: "Economy",
+      baggage: "8 + 20 kg",
+      dates: "Winter 2025/2026",
+      price: "CHF 320",
+      image:
+        "https://media.istockphoto.com/id/482989593/de/foto/tafelberg-kapstadt-s%C3%BCdafrika.webp?a=1&b=1&s=612x612&w=0&k=20&c=Yl_SBMZ6MjjAJRmY1KbBMVYGYsoGzaUk4T2uxDcJMoY=",
+    },
+    {
+      id: "BKK",
+      from: "Zürich",
+      to: "Bangkok",
+      airline: "Oman Air",
+      airtime: "15 Stunden",
+      travelClass: "Economy",
+      baggage: "8 + 20 kg",
+      dates: "Dezember - Juni 2026",
+      price: "CHF 370",
+      image:
+        "https://media.istockphoto.com/photos/sunset-city-skyline-at-wat-arun-bangkok-thailand-picture-id1421485141?b=1&k=20&m=1421485141&s=170667a&w=0&h=usaXhIIH3riO80Fpen4wQnChuhRiH23H9IZ91amr21o=",
     },
   ];
 
@@ -286,7 +286,7 @@ const Index = () => {
 
                         <div className="text-center mb-4">
                           <div className="text-xm font-semibold text-white">{deal.airline}</div>
-                          <div className="text-xm text-gray-300">✈️Flugzeug: {deal.aircraft}</div>
+                          <div className="text-xm text-gray-300">✈️Flugdauer: {deal.airtime}</div>
                           <div className="text-xm text-gray-300">💳Reiseklasse: {deal.travelClass}</div>
                           <div className="text-xm text-gray-300">🧳Gepäck: {deal.baggage}</div>
                         </div>
