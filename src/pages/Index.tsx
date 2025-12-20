@@ -35,43 +35,43 @@ const Index = () => {
   // Deals
   const deals: Deal[] = [
     {
-      id: "LGW",
+      id: "GIG",
       from: "Zürich",
-      to: "London",
+      to: "Rio de Janeiro",
+      airline: "ITA Airways",
+      airtime: "15h",
+      travelClass: "Economy",
+      baggage: "8 kg",
+      dates: "Februar - Juni 2026",
+      price: "CHF 545",
+      image:
+        "https://media.istockphoto.com/id/913075602/photo/sugarloaf-mountain-in-rio-de-janeiro-brazil.jpg?b=1&s=170667a&w=0&k=20&c=9I1v3exQ6RTcrCWFkF5VLHSXo01F85445Bml3khxTQA=",
+    },
+    {
+      id: "SHJ",
+      from: "Zürich",
+      to: "Dubai",
+      airline: "Turkish Airlines",
+      airtime: "10 Stunden",
+      travelClass: "Economy",
+      baggage: "8 + 25 kg (Aufpreis)",
+      dates: "Februar - März 2026",
+      price: "CHF 168",
+      image:
+        "https://media.istockphoto.com/id/1309800132/photo/dubai-skyline-view-from-the-marasi-marina-in-city-business-bay-downtown-area-in-the-uae.jpg?b=1&s=170667a&w=0&k=20&c=dxNscVwCBbqBEs6FiG2RTfUx5Htl8gUpF65mMmZgZko=",
+    },
+    {
+      id: "OPO",
+      from: "Zürich",
+      to: "Porto",
       airline: "Easyjet",
-      airtime: "1h40",
+      airtime: "2 Stunden",
       travelClass: "Economy",
       baggage: "Personal Item",
-      dates: "Januar-März 2026",
-      price: "CHF 54",
+      dates: "Februar - Juni 2026",
+      price: "CHF 73",
       image:
-        "https://images.unsplash.com/photo-1706576297893-752827156b69?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGxvbmRvbiUyMGNpdHklMjBza3lsaW5lfGVufDB8fDB8fHww",
-    },
-    {
-      id: "SIN",
-      from: "Zürich",
-      to: "Singapur",
-      airline: "Turkish Airlines",
-      airtime: "16 Stunden",
-      travelClass: "Economy",
-      baggage: "8 + 25 kg",
-      dates: "Januar-Juni 2026",
-      price: "CHF 469",
-      image:
-        "https://images.unsplash.com/photo-1541267226650-673e4bc869c7?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHNpbmdhcG9yZXxlbnwwfHwwfHx8MA%3D%3D",
-    },
-    {
-      id: "OGG",
-      from: "Zürich",
-      to: "Hawaii",
-      airline: "Condor",
-      airtime: "24 Stunden",
-      travelClass: "Economy",
-      baggage: "8 + 20 kg (Aufpreis)",
-      dates: "Januar-Mai 2026",
-      price: "CHF 665",
-      image:
-        "https://images.unsplash.com/photo-1520628185778-d80ddc01fba2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
+        "https://plus.unsplash.com/premium_photo-1677344087971-91eee10dfeb1?blend=000000&blend-alpha=10&blend-mode=normal&blend-w=1&crop=faces%2Cedges&h=630&mark=https:%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-align=top%2Cleft&mark-pad=50&mark-w=64&w=1200&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzExMzU4NTMzfA&ixlib=rb-4.0.3",
     },
   ];
 
