@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import twintButton from "@/assets/twint-button.svg";
 
-const TWINT_LINK = "https://go.twint.ch/1/e/tw?tw=acq.gLWaSc6qS9WXTyve02qU3TYzXh6aJj-WV-OoE_J4WpK9fVqgx8XwDgLVcKKthvDk.&amount=39.00&trxInfo=BLACKFRIDAY_PREMIUM_1Y"; // <-- deinen echten TWINT-Link einsetzen
+const TWINT_LINK = "https://go.twint.ch/1/e/tw?tw=acq.gLWaSc6qS9WXTyve02qU3TYzXh6aJj-WV-OoE_J4WpK9fVqgx8XwDgLVcKKthvDk.&amount=49.00&trxInfo=BLACKFRIDAY_PREMIUM_1Y"; // <-- deinen echten TWINT-Link einsetzen
 
 const Premium = () => {
   const [email, setEmail] = useState("");
@@ -125,7 +125,7 @@ const Premium = () => {
                 {/* Black Friday Badge */}
                 <div className="flex justify-center mb-2">
                   <span className="bg-green-400 text-black text-xs font-semibold px-3 py-1 rounded-full">
-                    Black Friday Deal
+                    Weihnachten 2026
                   </span>
                 </div>
               
@@ -134,20 +134,11 @@ const Premium = () => {
                 {/* Alte + neue Preise auf EINER Zeile */}
                 <div className="flex justify-center items-end gap-3 mb-2">
               
-                  {/* Durchgestrichener Early-Bird-Preis */}
-                  <span className="text-lg text-gray-400 line-through">
-                    CHF 49
-                  </span>
               
                   {/* Neuer Black-Friday-Preis */}
                   <span className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
-                    CHF 39
+                    CHF 49
                   </span>
-                </div>
-              
-                {/* Rabatt-Info */}
-                <div className="text-gray-400 text-sm leading-tight mb-2">
-                  20% Rabatt auf die Jahresmitgliedschaft
                 </div>
               
               </div>
