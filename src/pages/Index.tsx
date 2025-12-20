@@ -39,7 +39,7 @@ const Index = () => {
       from: "Zürich",
       to: "Rio de Janeiro",
       airline: "ITA Airways",
-      airtime: "15h",
+      airtime: "15 Stunden",
       travelClass: "Economy",
       baggage: "8 kg",
       dates: "Februar - Juni 2026",
