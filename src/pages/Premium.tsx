@@ -121,18 +121,18 @@ const Premium = () => {
                   Beliebt
                 </div>
               </div>
-            
+
               <div className="text-center mb-8">
-            
+
                 {/* Weihnachten Badge */}
                 <div className="flex justify-center mb-2">
                   <span className="bg-green-400 text-black text-xs font-semibold px-3 py-1 rounded-full">
                     Weihnachten 2026
                   </span>
                 </div>
-            
+
                 <h3 className="text-2xl font-bold mb-2 text-white">Premium</h3>
-            
+
                 {/* Preis */}
                 <div className="flex flex-col justify-center items-center mb-2">
                   <span className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
@@ -140,10 +140,19 @@ const Premium = () => {
                   </span>
                   <p className="text-gray-300 text-sm">Pro Jahr</p>
                 </div>
-            
-              </div>
-            </div>
 
+              </div>
+
+              {/* ✅ HIER bleiben ul & form IN der Card */}
+              <ul className="space-y-4 mb-8">
+                ...
+              </ul>
+
+              <form onSubmit={handleUpgrade} className="space-y-4">
+                ...
+              </form>
+
+            </div>
 
               
               <ul className="space-y-4 mb-8">
