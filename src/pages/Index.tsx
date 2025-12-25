@@ -10,6 +10,75 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { toast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 
+useEffect(() => {
+  if (typeof window === 'undefined') return;
+
+  !(function (w, d, t) {
+    w.TiktokAnalyticsObject = t;
+    var ttq = (w[t] = w[t] || []);
+
+    ttq.methods = [
+      'page',
+      'track',
+      'identify',
+      'instances',
+      'debug',
+      'on',
+      'off',
+      'once',
+      'ready',
+      'alias',
+      'group',
+      'enableCookie',
+      'disableCookie',
+      'holdConsent',
+      'revokeConsent',
+      'grantConsent',
+    ];
+
+    ttq.setAndDefer = function (t, e) {
+      t[e] = function () {
+        t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+      };
+    };
+
+    for (var i = 0; i < ttq.methods.length; i++) {
+      ttq.setAndDefer(ttq, ttq.methods[i]);
+    }
+
+    ttq.instance = function (t) {
+      var e = ttq._i[t] || [];
+      for (var n = 0; n < ttq.methods.length; n++) {
+        ttq.setAndDefer(e, ttq.methods[n]);
+      }
+      return e;
+    };
+
+    ttq.load = function (e, n) {
+      var r = 'https://analytics.tiktok.com/i18n/pixel/events.js';
+      ttq._i = ttq._i || {};
+      ttq._i[e] = [];
+      ttq._i[e]._u = r;
+      ttq._t = ttq._t || {};
+      ttq._t[e] = +new Date();
+      ttq._o = ttq._o || {};
+      ttq._o[e] = n || {};
+
+      var script = d.createElement('script');
+      script.type = 'text/javascript';
+      script.async = true;
+      script.src = r + '?sdkid=' + e + '&lib=' + t;
+
+      var firstScript = d.getElementsByTagName('script')[0];
+      firstScript.parentNode.insertBefore(script, firstScript);
+    };
+
+    // 🔥 DEIN PIXEL
+    ttq.load('D56KEHBC77U40DIQH5KG');
+    ttq.page();
+  })(window, document, 'ttq');
+}, []);
+
 type Deal = {
   id: string;
   from: string;
@@ -93,6 +162,12 @@ const Index = () => {
   const openDealModal = (deal: Deal) => {
     setSelectedDeal(deal);
     setIsDealModalOpen(true);
+  
+    // ✅ TikTok Event: Deal View
+    window.ttq?.track('ViewContent', {
+      content_name: `${deal.from} → ${deal.to}`,
+      value: deal.price,
+    });
   };
 
   const handleWaitlistSubmit = async (e: React.FormEvent) => {
@@ -121,6 +196,9 @@ const Index = () => {
         console.error('Waitlist error:', error);
         throw error;
       }
+
+      // ✅ TikTok Conversion: Waitlist Signup
+      window.ttq?.track('CompleteRegistration');
 
       try {
         await supabase.functions.invoke('send-confirmation-email', {
