@@ -202,20 +202,23 @@ const Index = () => {
       window.ttq?.track('CompleteRegistration');
 
       try {
-        await supabase.functions.invoke('send-confirmation-email', {
-          body: {
-            email: email.trim().toLowerCase(),
-            location: userLocation,
-            // source_deal: dealLabel, // <-- Optional
+        await fetch(
+          'https://wwoowwnjrepokmjgxhlw.functions.supabase.co/confirm',
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: email.trim().toLowerCase(),
+            }),
           }
-        });
-      } catch (emailError) {
-        console.error('Email sending error (non-blocking):', emailError);
+        );
+      } catch (error) {
+        console.error('Confirmation email error (non-blocking):', error);
       }
 
       toast({
         title: 'Erfolgreich angemeldet! 🎉',
-        description: 'Du hast es geschafft - wir werden dir bald weitere Informationen zukommen lassen.'
+        description: 'Bitte bestätige deine Email, um alle Deals zu erhalten.'
       });
 
       setEmail('');
