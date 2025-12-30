@@ -116,7 +116,7 @@ const Premium = () => {
               <div className="text-center mb-8">
                 <div className="flex justify-center mb-2">
                   <span className="bg-green-400 text-black text-xs font-semibold px-3 py-1 rounded-full">
-                    Weihnachten 2026
+                    Neujahr 2026
                   </span>
                 </div>
 
