@@ -51,15 +51,16 @@
         bottom: 20px;
         left: 20px;
         width: 320px;
-        background: #020617;
-        color: #e5e7eb;
-        border: 1px solid #111827;
+        background: rgba(2, 6, 23, 0.82);
+        color: #ffffff;
+        border: 1px solid rgba(255,255,255,0.08);
         border-radius: 14px;
         padding: 14px 14px 12px 14px;
         display: none;
         z-index: 9999;
         font-family: Inter, system-ui, sans-serif;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.35);
       "
     >
       <!-- Text row -->
@@ -67,23 +68,24 @@
         style="
           font-size: 12.5px;
           line-height: 1.5;
-          color: #cbd5f5;
+          color: rgba(255,255,255,0.85);
           margin-bottom: 12px;
         "
       >
-        Wir verwenden Cookies für Marketing & Tracking (z.&nbsp;B. Reichweitenmessung
-        und Affiliate-Links).
+        Wir verwenden Cookies für Marketing & Tracking
+        (z.&nbsp;B. Reichweitenmessung & Affiliate-Links).
       </div>
     
       <!-- Button row -->
       <div style="display: flex; gap: 10px;">
+        <!-- Accept (primary) -->
         <button
           id="cookie-accept"
           style="
             flex: 1;
-            background: #2264f5;
+            background: rgba(34,100,245,0.9);
             color: #ffffff;
-            border: none;
+            border: 1px solid rgba(255,255,255,0.12);
             padding: 8px 10px;
             border-radius: 10px;
             font-size: 12.5px;
@@ -94,13 +96,14 @@
           Akzeptieren
         </button>
     
+        <!-- Decline (secondary, ghost-style) -->
         <button
           id="cookie-decline"
           style="
             flex: 1;
-            background: #020617;
-            color: #cbd5f5;
-            border: 1px solid #1f2937;
+            background: rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.85);
+            border: 1px solid rgba(255,255,255,0.12);
             padding: 8px 10px;
             border-radius: 10px;
             font-size: 12.5px;
@@ -111,6 +114,7 @@
         </button>
       </div>
     </div>
+
 
     <div id="root"></div>
 
