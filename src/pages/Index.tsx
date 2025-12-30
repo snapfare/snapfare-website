@@ -202,7 +202,7 @@ const Index = () => {
       window.ttq?.track('CompleteRegistration');
 
       try {
-        await fetch(
+        const res = await fetch(
           'https://wwoowwnjrepokmjgxhlw.functions.supabase.co/confirm',
           {
             method: 'POST',
@@ -212,6 +212,9 @@ const Index = () => {
             }),
           }
         );
+        
+        alert('Confirm POST status: ' + res.status);
+        
       } catch (error) {
         console.error('Confirmation email error (non-blocking):', error);
       }
