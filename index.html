@@ -247,6 +247,12 @@
         window.gtag = gtag;
     
         gtag("js", new Date());
+
+          // TEMPORARY: track all users (easy to remove)
+          gtag('consent', 'update', {
+            ad_storage: 'granted',
+            analytics_storage: 'granted'
+          });
         
         gtag("config", "G-0G9TKRS60D", {
           anonymize_ip: true
