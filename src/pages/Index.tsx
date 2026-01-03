@@ -36,43 +36,43 @@ const Index = () => {
   // Deals
   const deals: Deal[] = [
     {
-      id: "GIG",
+      id: "PMI",
       from: "Zürich",
-      to: "Rio de Janeiro",
-      airline: "ITA Airways",
-      airtime: "15 Stunden",
-      travelClass: "Economy",
-      baggage: "8 kg",
-      dates: "Februar - Juni 2026",
-      price: "CHF 545",
-      image:
-        "https://media.istockphoto.com/id/913075602/photo/sugarloaf-mountain-in-rio-de-janeiro-brazil.jpg?b=1&s=170667a&w=0&k=20&c=9I1v3exQ6RTcrCWFkF5VLHSXo01F85445Bml3khxTQA=",
-    },
-    {
-      id: "SHJ",
-      from: "Zürich",
-      to: "Dubai",
-      airline: "Turkish Airlines",
-      airtime: "10 Stunden",
-      travelClass: "Economy",
-      baggage: "8 + 25 kg (Aufpreis)",
-      dates: "Februar - März 2026",
-      price: "CHF 168",
-      image:
-        "https://media.istockphoto.com/id/1309800132/photo/dubai-skyline-view-from-the-marasi-marina-in-city-business-bay-downtown-area-in-the-uae.jpg?b=1&s=170667a&w=0&k=20&c=dxNscVwCBbqBEs6FiG2RTfUx5Htl8gUpF65mMmZgZko=",
-    },
-    {
-      id: "OPO",
-      from: "Zürich",
-      to: "Porto",
-      airline: "Easyjet",
+      to: "Mallorca",
+      airline: "Swiss/Easyjet/Vueling",
       airtime: "2 Stunden",
       travelClass: "Economy",
-      baggage: "Personal Item",
-      dates: "Februar - Juni 2026",
-      price: "CHF 73",
+      baggage: "8 kg",
+      dates: "Januar - Juni 2026",
+      price: "CHF 45",
       image:
-        "https://plus.unsplash.com/premium_photo-1677344087971-91eee10dfeb1?blend=000000&blend-alpha=10&blend-mode=normal&blend-w=1&crop=faces%2Cedges&h=630&mark=https:%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-align=top%2Cleft&mark-pad=50&mark-w=64&w=1200&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzExMzU4NTMzfA&ixlib=rb-4.0.3",
+        "https://images.unsplash.com/photo-1617532408070-369f42b448b0?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFsbG9yY2F8ZW58MHx8MHx8fDA%3D=",
+    },
+    {
+      id: "BKK",
+      from: "Zürich",
+      to: "Bangkok",
+      airline: "Etihad Airlines",
+      airtime: "17 Stunden",
+      travelClass: "Economy",
+      baggage: "7 + 25 kg",
+      dates: "Januar - Juni 2026",
+      price: "CHF 450",
+      image:
+        "https://media.istockphoto.com/id/507913346/photo/wat-arun-temple-at-sunset-in-bangkok-thailand.jpg?b=1&s=170667a&w=0&k=20&c=hR5cKxxJFl_iI-ah9NAf27Re-lMvD9nx4NOGAJFWw_s=",
+    },
+    {
+      id: "BER",
+      from: "Zürich",
+      to: "Berlin",
+      airline: "Easyjet",
+      airtime: "1.5 Stunden",
+      travelClass: "Economy",
+      baggage: "Personal Item",
+      dates: "Januar - Juni 2026",
+      price: "CHF 70",
+      image:
+        "https://media.istockphoto.com/photos/berlin-skyline-at-night-picture-id479005779?b=1&k=20&m=479005779&s=170667a&w=0&h=0UzVJFBANUvxaI1Qhb02NHQ39xqBhtb9vA4Udq2nHH0=",
     },
   ];
 
