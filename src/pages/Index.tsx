@@ -37,7 +37,7 @@ const Index = () => {
   const deals: Deal[] = [
     {
       id: "KRK",
-      from: "Zürich",
+      from: "Basel",
       to: "Krakau",
       airline: "Wizzair/Easyjet",
       airtime: "1.5 Stunden",
@@ -50,7 +50,7 @@ const Index = () => {
     },
     {
       id: "PRN",
-      from: "Zürich",
+      from: "Basel",
       to: "Pristina",
       airline: "Easyjet",
       airtime: "2 Stunden",
