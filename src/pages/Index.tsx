@@ -41,8 +41,8 @@ const Index = () => {
       to: "Istanbul",
       airline: "Turkish Airlines",
       airtime: "3 Stunden",
-      travelClass: "Handgepäck",
-      baggage: "Personal Item",
+      travelClass: "Economy",
+      baggage: "Handgepäck",
       dates: "Februar - Juni 2026",
       price: "CHF 55",
       image:
