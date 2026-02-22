@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
-  Plane, Clock, Target, Bell, CreditCard, Shield, User, ArrowRight, Bug
+  Plane, Clock, Target, Bell, CreditCard, Shield, User, ArrowRight
 } from 'lucide-react';
 import { SiTiktok, SiYoutube } from 'react-icons/si';
 import { Button } from '@/components/ui/button';
@@ -28,6 +28,10 @@ const Index = () => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [userLocation, setUserLocation] = useState<string>('');
+
+  // Cookie consent (minimal, localStorage-based)
+  const [cookieConsent, setCookieConsent] = useState<'accepted' | 'rejected' | null>(null);
+  const [isCookieModalOpen, setIsCookieModalOpen] = useState(false);
 
   // Modal state + ausgewählter Deal
   const [isDealModalOpen, setIsDealModalOpen] = useState(false);
@@ -77,6 +81,22 @@ const Index = () => {
   ];
 
 useEffect(() => {
+  // 0️⃣ Read cookie consent once
+  try {
+    const stored = localStorage.getItem('snapfare_cookie_consent');
+    if (stored === 'accepted' || stored === 'rejected') {
+      setCookieConsent(stored);
+      setIsCookieModalOpen(false);
+    } else {
+      setCookieConsent(null);
+      setIsCookieModalOpen(true);
+    }
+  } catch {
+    // If storage is blocked, still show the modal
+    setCookieConsent(null);
+    setIsCookieModalOpen(true);
+  }
+
   // 1️⃣ Capture UTM source once
   const params = new URLSearchParams(window.location.search);
   const utmSource = params.get("utm_source");
@@ -100,15 +120,33 @@ useEffect(() => {
   getUserLocation();
 }, []);
 
+  const acceptCookies = () => {
+    try {
+      localStorage.setItem('snapfare_cookie_consent', 'accepted');
+    } catch {}
+    setCookieConsent('accepted');
+    setIsCookieModalOpen(false);
+  };
+
+  const rejectCookies = () => {
+    try {
+      localStorage.setItem('snapfare_cookie_consent', 'rejected');
+    } catch {}
+    setCookieConsent('rejected');
+    setIsCookieModalOpen(false);
+  };
+
   const openDealModal = (deal: Deal) => {
     setSelectedDeal(deal);
     setIsDealModalOpen(true);
   
     // ✅ TikTok Event: Deal View
-    window.ttq?.track('ViewContent', {
-      content_name: `${deal.from} → ${deal.to}`,
-      value: deal.price,
-    });
+    if (cookieConsent === 'accepted') {
+      window.ttq?.track('ViewContent', {
+        content_name: `${deal.from} → ${deal.to}`,
+        value: deal.price,
+      });
+    }
   };
 
   const handleWaitlistSubmit = async (e: React.FormEvent) => {
@@ -140,7 +178,9 @@ useEffect(() => {
       }
 
       // ✅ TikTok Conversion: Waitlist Signup
-      window.ttq?.track('CompleteRegistration');
+      if (cookieConsent === 'accepted') {
+        window.ttq?.track('CompleteRegistration');
+      }
 
       try {
         const res = await fetch(
@@ -519,21 +559,36 @@ useEffect(() => {
         </div>
       </div>
 
-      {/* Floating "Found a bug?" CTA */}
-      <a
-        href="mailto:contact@basics-db.ch?subject=Found%20a%20bug%3F%20Get%20hired%21"
-        aria-label="Found a bug? Get hired! Email us"
-        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 focus:outline-none focus:ring-2 focus:ring-green-500 rounded-full group"
-        rel="noopener noreferrer"
-      >
-        <div className="flex items-center gap-2 rounded-full px-4 py-2 bg-white/10 border border-white/20 backdrop-blur shadow-lg hover:bg-white/15 hover:border-white/30 transition-all">
-          <Bug className="h-4 w-4 text-green-400 group-hover:rotate-12 transition-transform" />
-          <span className="text-xs sm:text-sm text-white leading-tight">
-            <span className="font-semibold">Found a bug?</span>{' '}
-            <span className="text-gray-300">Get hired!</span>
-          </span>
-        </div>
-      </a>
+      {/* Cookie Consent Popup (shows on mobile + desktop) */}
+      <Dialog open={isCookieModalOpen} onOpenChange={(open) => setIsCookieModalOpen(open)}>
+        <DialogContent
+          className="w-[92vw] max-w-none sm:w-[560px] sm:max-w-none p-6 sm:p-8 rounded-2xl shadow-2xl"
+          // Make sure the user actually makes a choice (no accidental dismiss on mobile)
+          onInteractOutside={(e) => e.preventDefault()}
+          onEscapeKeyDown={(e) => e.preventDefault()}
+        >
+          <DialogHeader>
+            <DialogTitle className="text-xl sm:text-2xl text-center">Cookies & Tracking</DialogTitle>
+            <DialogDescription className="text-center">
+              We use cookies (and similar technologies) to measure what works and improve SnapFare.
+              Accepting allows us to run tracking pixels.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="text-sm text-slate-600 text-center">
+            You can change your choice anytime by clearing your browser storage.
+          </div>
+
+          <DialogFooter className="gap-2 sm:gap-3 sm:justify-center">
+            <Button type="button" variant="outline" onClick={rejectCookies} className="w-full sm:w-auto">
+              Reject
+            </Button>
+            <Button type="button" onClick={acceptCookies} className="w-full sm:w-auto">
+              Accept
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
