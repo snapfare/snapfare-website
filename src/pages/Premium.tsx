@@ -90,16 +90,6 @@ const Premium = () => {
                   <Check className="w-5 h-5 text-green-400" />
                   <span className="text-gray-300">Newsletter mit den besten Reisedeals</span>
                 </li>
-                <li className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">Exklusive Meilendeals</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">
-                    Kostenloser Zugang zur personalisierten Flugsuche (soon)
-                  </span>
-                </li>
               </ul>
 
               <Button
@@ -122,7 +112,7 @@ const Premium = () => {
 
               <div className="text-center mb-8">
                 <span className="inline-block bg-green-400 text-black text-xs font-semibold px-3 py-1 rounded-full mb-2">
-                  Neujahr 2026
+                  Frühling 2026
                 </span>
                 <h3 className="text-2xl font-bold mb-2 text-white">Premium</h3>
                 <span className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
@@ -134,11 +124,11 @@ const Premium = () => {
               <ul className="space-y-4 mb-8">
                 {[
                   "Newsletter mit den besten Reisedeals",
-                  "Exklusive Meilendeals",
-                  "Kostenloser Zugang zur personalisierten Flugsuche (soon)",
-                  "Personalisierte Live-Benachrichtigungen (soon)",
-                  "Business- und Meilendeals auf Langstrecke",
-                  "Direktbuchung Deals (soon)",
+                  "Exklusive Meilendeals ab der Schweiz",
+                  "Businessclass-Deals auf der Langstrecke",
+                  "Frühzugang zur personalisierten Flugsuche",
+                  "Frühzugang zur 1-Click-Flugbuchungsplattform",
+                  "Vergünstigte Beratungen zu den besten Deals"
                   "Zugang zur exklusiven SnapFare Community",
                 ].map((text) => (
                   <li key={text} className="flex items-center gap-3">
