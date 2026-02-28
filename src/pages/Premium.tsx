@@ -128,7 +128,7 @@ const Premium = () => {
                   "Businessclass-Deals auf der Langstrecke",
                   "Frühzugang zur personalisierten Flugsuche",
                   "Frühzugang zur 1-Click-Flugbuchungsplattform",
-                  "Vergünstigte Beratungen zu den besten Deals"
+                  "Vergünstigte Beratungen zu den besten Deals",
                   "Zugang zur exklusiven SnapFare Community"
                 ].map((text) => (
                   <li key={text} className="flex items-center gap-3">
