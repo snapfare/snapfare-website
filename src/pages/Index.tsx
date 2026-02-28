@@ -36,60 +36,69 @@ const Index = () => {
   // Deals
   const deals: Deal[] = [
     {
-      id: "GIG",
+      id: "IST",
       from: "Zürich",
-      to: "Rio de Janeiro",
-      airline: "ITA Airways",
-      airtime: "15 Stunden",
-      travelClass: "Economy",
-      baggage: "8 kg",
-      dates: "Februar - Juni 2026",
-      price: "CHF 545",
-      image:
-        "https://media.istockphoto.com/id/913075602/photo/sugarloaf-mountain-in-rio-de-janeiro-brazil.jpg?b=1&s=170667a&w=0&k=20&c=9I1v3exQ6RTcrCWFkF5VLHSXo01F85445Bml3khxTQA=",
-    },
-    {
-      id: "SHJ",
-      from: "Zürich",
-      to: "Dubai",
+      to: "Istanbul",
       airline: "Turkish Airlines",
-      airtime: "10 Stunden",
+      airtime: "3 Stunden",
       travelClass: "Economy",
-      baggage: "8 + 25 kg (Aufpreis)",
-      dates: "Februar - März 2026",
-      price: "CHF 168",
+      baggage: "Handgepäck",
+      dates: "Februar - Juni 2026",
+      price: "CHF 55",
       image:
-        "https://media.istockphoto.com/id/1309800132/photo/dubai-skyline-view-from-the-marasi-marina-in-city-business-bay-downtown-area-in-the-uae.jpg?b=1&s=170667a&w=0&k=20&c=dxNscVwCBbqBEs6FiG2RTfUx5Htl8gUpF65mMmZgZko=",
+        "https://plus.unsplash.com/premium_photo-1681929370651-cc8391395d81?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8aXN0YW5idWx8ZW58MHx8MHx8fDA%3D",
     },
     {
-      id: "OPO",
-      from: "Zürich",
-      to: "Porto",
+      id: "BCN",
+      from: "Basel",
+      to: "Barcelona",
       airline: "Easyjet",
       airtime: "2 Stunden",
       travelClass: "Economy",
-      baggage: "Personal Item",
-      dates: "Februar - Juni 2026",
-      price: "CHF 73",
+      baggage: "Handgepäck",
+      dates: "März, Mai, Juni, und Juli 2026",
+      price: "CHF 42",
       image:
-        "https://plus.unsplash.com/premium_photo-1677344087971-91eee10dfeb1?blend=000000&blend-alpha=10&blend-mode=normal&blend-w=1&crop=faces%2Cedges&h=630&mark=https:%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-align=top%2Cleft&mark-pad=50&mark-w=64&w=1200&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzExMzU4NTMzfA&ixlib=rb-4.0.3",
+        "https://images.unsplash.com/photo-1599484233778-5bdc6b69bbe3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MXxzZWFyY2h8Mnx8YmFyY2Vsb25hJTIwYmVhY2h8fDB8fHx8MTYxOTAwNjc4NA&ixlib=rb-1.2.1&q=80&w=1080",
+    },
+    {
+      id: "CMB",
+      from: "Zürich",
+      to: "Sri Lanka",
+      airline: "Etihad",
+      airtime: "12 Stunden",
+      travelClass: "Economy",
+      baggage: "8 + 25 kg",
+      dates: "März - Juni 2026",
+      price: "CHF 450",
+      image:
+        "https://images.unsplash.com/photo-1743585825000-5f2a75e59f20?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
   ];
 
-  useEffect(() => {
-    const getUserLocation = async () => {
-      try {
-        const response = await fetch('https://ipapi.co/json/');
-        const data = await response.json();
-        setUserLocation(`${data.city}, ${data.country_name}`);
-      } catch (error) {
-        console.log('Could not get location:', error);
-        setUserLocation('Unknown');
-      }
-    };
+useEffect(() => {
+  // 1️⃣ Capture UTM source once
+  const params = new URLSearchParams(window.location.search);
+  const utmSource = params.get("utm_source");
 
-    getUserLocation();
-  }, []);
+  if (utmSource) {
+    sessionStorage.setItem("utm_source", utmSource.toLowerCase());
+  }
+
+  // 2️⃣ Existing location logic (unchanged)
+  const getUserLocation = async () => {
+    try {
+      const response = await fetch('https://ipapi.co/json/');
+      const data = await response.json();
+      setUserLocation(`${data.city}, ${data.country_name}`);
+    } catch (error) {
+      console.log('Could not get location:', error);
+      setUserLocation('Unknown');
+    }
+  };
+
+  getUserLocation();
+}, []);
 
   const openDealModal = (deal: Deal) => {
     setSelectedDeal(deal);
@@ -114,6 +123,7 @@ const Index = () => {
           ? `${selectedDeal.from} → ${selectedDeal.to} (${selectedDeal.airline}) – ${selectedDeal.price}`
           : null;
 
+      const utm_source = sessionStorage.getItem("utm_source") ?? "direct";
       const { error } = await supabase
         .from('waitlist')
         .insert([
@@ -171,33 +181,18 @@ const Index = () => {
   const features = [
     {
       icon: <Clock className="w-8 h-8" />,
-      title: 'Echtzeit-Deal-Radar',
-      description: 'Scannt minütlich das Internet nach Flugdeals und benachrichtigt dich sofort.'
-    },
-    {
-      icon: <Target className="w-8 h-8" />,
-      title: 'Preference-Match-Engine',
-      description: 'Gleicht automatisch Heimatflughafen, Budget, Reisefenster und Wetter mit jedem Deal ab.'
+      title: 'Wunschdeal festlegen',
+      description: 'Teile SnapFare mit, wonach du suchst – in 30 Sekunden erledigt.'
     },
     {
       icon: <Bell className="w-8 h-8" />,
-      title: 'Smart-Alert System',
-      description: 'Eine einzige Push-Nachricht statt Spam-Flut – nur bei perfekten Matches.'
+      title: 'Benachrichtigung erhalten',
+      description: 'Findet SnapFare einen passenden Flugdeal, bekommst du sofort eine E-Mail.'
     },
     {
-      icon: <CreditCard className="w-8 h-8" />,
-      title: '1-Tap-Buchung',
-      description: 'SnapFare füllt alle Formulare aus, reserviert den Sitzplatz und zahlt automatisch.'
-    },
-    {
-      icon: <Shield className="w-8 h-8" />,
-      title: 'Price-Guard Monitor',
-      description: 'Überwacht Tarife nach der Buchung und fordert automatisch Erstattungen bei Preisstürzen an.'
-    },
-    {
-      icon: <User className="w-8 h-8" />,
-      title: 'Post-Trip-Assistent',
-      description: 'Erledigt Umbuchungen, Visa-Checks und Check-in-Links – vollautomatisch und stressfrei.'
+      icon: <Target className="w-8 h-8" />,
+      title: 'Buchen & Sparen',
+      description: 'In der Benachrichtigung findest du direkt den Buchungslink zum Angebot.'
     }
   ];
 
@@ -374,7 +369,7 @@ const Index = () => {
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12 sm:mb-16 lg:mb-20">
                   <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 px-4">
-                    So funktioniert die <span className="text-green-400">bevorstehende Automatisierung</span>
+                    SnapFare findet automatisch die besten <span className="text-green-400">Angebote</span>
                   </h2>
                 </div>
 
@@ -399,7 +394,7 @@ const Index = () => {
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12 sm:mb-16 lg:mb-20">
                   <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 px-4">
-                    Von Deal zu Boarding Pass in <span className="text-blue-400">3 Minuten</span>
+                    Warum <span className="text-blue-400">SnapFare</span>?
                   </h2>
                 </div>
 
@@ -408,32 +403,32 @@ const Index = () => {
                     <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
                       <span className="text-white font-bold text-lg sm:text-xl">1</span>
                     </div>
-                    <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">Deal erkannt</h3>
-                    <p className="text-sm sm:text-base text-gray-300">SnapFare findet einen perfekten Match für deine Präferenzen</p>
+                    <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">Spare gutes Geld</h3>
+                    <p className="text-sm sm:text-base text-gray-300">Die besten Flugpreise sind oft nur kurz verfügbar. SnapFare erkennt sie sofort – bevor sie wieder verschwinden.</p>
                   </div>
 
                   <div className="text-center">
                     <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
                       <span className="text-white font-bold text-lg sm:text-xl">2</span>
                     </div>
-                    <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">Smart-Alert</h3>
-                    <p className="text-sm sm:text-base text-gray-300">Du erhältst eine Push-Nachricht mit allen benötigten Details</p>
+                    <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">Keine endlosen Preisvergleiche</h3>
+                    <p className="text-sm sm:text-base text-gray-300">Vergiss 10 Tabs und stundenlanges Suchen. SnapFare übernimmt die Recherche für dich.</p>
                   </div>
 
                   <div className="text-center">
                     <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
                       <span className="text-white font-bold text-lg sm:text-xl">3</span>
                     </div>
-                    <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">1-Tap-Buchung</h3>
-                    <p className="text-sm sm:text-base text-gray-300">SnapFare bucht automatisch, du zahlst mit Zahlungsmittel deiner Wahl</p>
+                    <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">Nur relevante Deals</h3>
+                    <p className="text-sm sm:text-base text-gray-300">Du bekommst nur Angebote, die wirklich gut sind. Kein Newsletter-Müll.</p>
                   </div>
 
                   <div className="text-center">
                     <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
                       <span className="text-white font-bold text-lg sm:text-xl">4</span>
                     </div>
-                    <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">Automatik läuft</h3>
-                    <p className="text-sm sm:text-base text-gray-300">Price-Guard und Post-Trip-Assistent übernehmen den Rest</p>
+                    <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">Kostenlos & jederzeit kündbar</h3>
+                    <p className="text-sm sm:text-base text-gray-300">Keine Gebühren. Keine Verpflichtung. Einfach anmelden und testen.</p>
                   </div>
                 </div>
               </div>
@@ -524,21 +519,6 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Floating "Found a bug?" CTA */}
-      <a
-        href="mailto:contact@basics-db.ch?subject=Found%20a%20bug%3F%20Get%20hired%21"
-        aria-label="Found a bug? Get hired! Email us"
-        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 focus:outline-none focus:ring-2 focus:ring-green-500 rounded-full group"
-        rel="noopener noreferrer"
-      >
-        <div className="flex items-center gap-2 rounded-full px-4 py-2 bg-white/10 border border-white/20 backdrop-blur shadow-lg hover:bg-white/15 hover:border-white/30 transition-all">
-          <Bug className="h-4 w-4 text-green-400 group-hover:rotate-12 transition-transform" />
-          <span className="text-xs sm:text-sm text-white leading-tight">
-            <span className="font-semibold">Found a bug?</span>{' '}
-            <span className="text-gray-300">Get hired!</span>
-          </span>
-        </div>
-      </a>
     </div>
   );
 };

@@ -48,33 +48,34 @@
       id="cookie-banner"
       style="
         position: fixed;
-        bottom: 20px;
-        left: 20px;
-        width: 320px;
-        background: rgba(255,255,255,0.10); /* bg-white/10 */
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(320px, calc(100vw - 40px));
+        background: rgba(20, 20, 20, 0.9); /* less transparent */
         color: #ffffff;
-        border: 1px solid rgba(255,255,255,0.20); /* border-white/20 */
-        border-radius: 14px;
-        padding: 14px;
+        border: 1px solid rgba(255,255,255,0.25);
+        border-radius: 18px;
+        padding: 32px 20px; /* MUCH taller */
         display: none;
         z-index: 9999;
         font-family: Inter, system-ui, sans-serif;
-        backdrop-filter: blur(8px); /* backdrop-blur */
-        -webkit-backdrop-filter: blur(8px);
-        box-shadow: 0 10px 15px rgba(0,0,0,0.25); /* shadow-lg */
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        box-shadow: 0 25px 50px rgba(0,0,0,0.5);
       "
     >
       <!-- Text -->
       <div
         style="
-          font-size: 12.5px;
-          line-height: 1.5;
+          font-size: 14px;
+          line-height: 1.6;
           color: #ffffff;
-          margin-bottom: 12px;
+          margin-bottom: 10px;
         "
       >
-        Wir verwenden Cookies für Marketing & Tracking
-        (z.&nbsp;B. Reichweitenmessung & Affiliate-Links).
+        Wir verwenden Cookies für die besten Deals!<br>
+        (z.&nbsp;B. Reichweitenmessung & Affiliate-Links)
       </div>
     
       <!-- Buttons -->
@@ -247,6 +248,13 @@
         window.gtag = gtag;
     
         gtag("js", new Date());
+
+          // TEMPORARY: track all users (easy to remove)
+          gtag('consent', 'update', {
+            ad_storage: 'granted',
+            analytics_storage: 'granted'
+          });
+        
         gtag("config", "G-0G9TKRS60D", {
           anonymize_ip: true
         });
