@@ -129,7 +129,7 @@ const Premium = () => {
                   "Frühzugang zur personalisierten Flugsuche",
                   "Frühzugang zur 1-Click-Flugbuchungsplattform",
                   "Vergünstigte Beratungen zu den besten Deals"
-                  "Zugang zur exklusiven SnapFare Community",
+                  "Zugang zur exklusiven SnapFare Community"
                 ].map((text) => (
                   <li key={text} className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-green-400" />
