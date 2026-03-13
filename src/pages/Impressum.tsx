@@ -72,7 +72,7 @@ const Impressum = () => {
               </div>
               
               <p className="text-gray-400 text-xs sm:text-sm">
-                © 2025 SnapFare. Alle Rechte vorbehalten.
+                © 2026 SnapFare. Alle Rechte vorbehalten.
               </p>
             </div>
           </div>
