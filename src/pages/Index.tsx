@@ -36,43 +36,43 @@ const Index = () => {
   // Deals
   const deals: Deal[] = [
     {
-      id: "IST",
+      id: "AYT",
       from: "Zürich",
-      to: "Istanbul",
-      airline: "Turkish Airlines",
+      to: "Antalya",
+      airline: "SunExpress",
+      airtime: "3 Stunden",
+      travelClass: "Economy",
+      baggage: "Aufgabegepäck inklusive",
+      dates: "April und Juni 2026",
+      price: "CHF 95",
+      image:
+        "https://plus.unsplash.com/premium_photo-1661962590522-1b700c5bb5e3?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YW50YWx5YXxlbnwwfHwwfHx8MA%3D%3D",
+    },
+    {
+      id: "AGP",
+      from: "Zürich",
+      to: "Marbella",
+      airline: "Easyjet",
       airtime: "3 Stunden",
       travelClass: "Economy",
       baggage: "Handgepäck",
-      dates: "Februar - Juni 2026",
-      price: "CHF 55",
+      dates: "Juni und Juli 2026",
+      price: "CHF 70",
       image:
-        "https://plus.unsplash.com/premium_photo-1681929370651-cc8391395d81?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8aXN0YW5idWx8ZW58MHx8MHx8fDA%3D",
+        "https://images.unsplash.com/photo-1722452848310-cc5607a3851c?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fG1hcmJlbGxhfGVufDB8fDB8fHww",
     },
     {
-      id: "BCN",
-      from: "Basel",
-      to: "Barcelona",
-      airline: "Easyjet",
+      id: "PMI",
+      from: "Zürich",
+      to: "Mallorca",
+      airline: "Vueling",
       airtime: "2 Stunden",
       travelClass: "Economy",
       baggage: "Handgepäck",
-      dates: "März, Mai, Juni, und Juli 2026",
-      price: "CHF 42",
+      dates: "April - September 2026",
+      price: "CHF 40",
       image:
-        "https://images.unsplash.com/photo-1599484233778-5bdc6b69bbe3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MXxzZWFyY2h8Mnx8YmFyY2Vsb25hJTIwYmVhY2h8fDB8fHx8MTYxOTAwNjc4NA&ixlib=rb-1.2.1&q=80&w=1080",
-    },
-    {
-      id: "CMB",
-      from: "Zürich",
-      to: "Sri Lanka",
-      airline: "Etihad",
-      airtime: "12 Stunden",
-      travelClass: "Economy",
-      baggage: "8 + 25 kg",
-      dates: "März - Juni 2026",
-      price: "CHF 450",
-      image:
-        "https://images.unsplash.com/photo-1743585825000-5f2a75e59f20?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://images.unsplash.com/photo-1617532408070-369f42b448b0?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFsbG9yY2F8ZW58MHx8MHx8fDA%3D",
     },
   ];
 
@@ -80,10 +80,11 @@ useEffect(() => {
   // 1️⃣ Capture UTM source once
   const params = new URLSearchParams(window.location.search);
   const utmSource = params.get("utm_source");
-
-  if (utmSource) {
-    sessionStorage.setItem("utm_source", utmSource.toLowerCase());
-  }
+  const utmMedium = params.get("utm_medium");
+  const utmCampaign = params.get("utm_campaign");
+  if (utmSource) sessionStorage.setItem("utm_source", utmSource.toLowerCase());
+  if (utmMedium) sessionStorage.setItem("utm_medium", utmMedium.toLowerCase());
+  if (utmCampaign) sessionStorage.setItem("utm_campaign", utmCampaign.toLowerCase());
 
   // 2️⃣ Existing location logic (unchanged)
   const getUserLocation = async () => {
@@ -123,16 +124,16 @@ useEffect(() => {
           ? `${selectedDeal.from} → ${selectedDeal.to} (${selectedDeal.airline}) – ${selectedDeal.price}`
           : null;
 
-      const utm_source = sessionStorage.getItem("utm_source") ?? "direct";
-      const { error } = await supabase
-        .from('waitlist')
-        .insert([
-          {
-            email: email.trim().toLowerCase(),
-            location: userLocation,
-            // source_deal: dealLabel, // <-- Optional: Spalte vorher mit ALTER TABLE anlegen
-          }
-        ]);
+      const utm_source = sessionStorage.getItem("utm_source") ?? null;
+      const utm_medium = sessionStorage.getItem("utm_medium") ?? null;
+      const utm_campaign = sessionStorage.getItem("utm_campaign") ?? null;
+      const { error } = await supabase.from('waitlist').insert([{
+        email: email.trim().toLowerCase(),
+        location: userLocation,
+        utm_source,
+        utm_medium,
+        utm_campaign,
+      }]);
 
       if (error) {
         console.error('Waitlist error:', error);
